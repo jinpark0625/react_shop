@@ -1,52 +1,52 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./pages/home";
-import AllProdocuts from "./pages/allProducts";
-import ProductDetail from "./pages/productDetail";
-import NewProduct from "./pages/newProduct";
-import MyCart from "./pages/myCart";
-import NotFound from "./pages/notFound";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Home from './pages/Home';
+import AllProdocuts from './pages/AllProducts';
+import ProductDetail from './pages/ProductDetail';
+import NewProduct from './pages/NewProduct';
+import MyCart from './pages/MyCart';
+import NotFound from './pages/NotFound';
 
 const router = createBrowserRouter([
   {
-    parth: "/",
+    parth: '/',
     element: <App />,
     errorElement: <NotFound />,
     children: [
       {
         index: true,
-        path: "/",
+        path: '/',
         element: <Home />,
       },
       {
-        path: "/products",
+        path: '/products',
         element: <AllProdocuts />,
       },
       {
-        path: "/prodcuts/new",
+        path: '/prodcuts/new',
         element: <NewProduct />,
       },
       {
-        path: "/products/:id",
+        path: '/products/:id',
         element: <ProductDetail />,
       },
       {
-        path: "/carts",
+        path: '/carts',
         element: <MyCart />,
       },
     ],
   },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function
