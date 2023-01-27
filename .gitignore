@@ -6,6 +6,7 @@
 /.pnp
 .pnp.js
 .yarnrc.yml
+.vscode
 
 # testing
 /coverage
