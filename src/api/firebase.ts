@@ -5,7 +5,9 @@ import {
   GoogleAuthProvider,
   signOut,
   onAuthStateChanged,
+  User,
 } from 'firebase/auth';
+import { Dispatch, SetStateAction } from 'react';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -14,27 +16,24 @@ const firebaseConfig = {
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
 };
 
+// type
+type DispatchType = Dispatch<SetStateAction<User | null>>;
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 export async function login() {
-  return signInWithPopup(auth, provider)
-    .then((result) => {
-      const user = result.user;
-      console.log(user);
-      return user;
-    })
-    .catch(console.error);
+  return await signInWithPopup(auth, provider).catch(console.error);
 }
 
 export async function logout() {
-  return signOut(auth).then(() => null);
+  await signOut(auth).catch(console.error);
 }
 
-export function onUserStateChange(callback) {
-  onAuthStateChanged(auth, (user) => {
-    callback(auth, user);
+export function onUserStateChange(callback: DispatchType) {
+  onAuthStateChanged(auth, (user: User | null) => {
+    callback(user);
   });
 }
