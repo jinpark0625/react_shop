@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/return-await */
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,
@@ -7,6 +6,7 @@ import {
   signOut,
   onAuthStateChanged,
   User,
+  UserCredential,
 } from 'firebase/auth';
 import { Dispatch, SetStateAction } from 'react';
 import { getDatabase, ref, get } from 'firebase/database';
@@ -27,11 +27,15 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 const database = getDatabase(app);
 
-export async function login() {
-  return await signInWithPopup(auth, provider).catch(console.error);
+export async function login(): Promise<undefined | UserCredential> {
+  try {
+    return await signInWithPopup(auth, provider);
+  } catch (e) {
+    console.log(e);
+  }
 }
 
-export async function logout() {
+export async function logout(): Promise<void> {
   await signOut(auth).catch(console.error);
 }
 
@@ -45,7 +49,7 @@ export function onUserStateChange(callback: DispatchType) {
 }
 
 async function adminUser(user: User) {
-  return get(ref(database, 'admins')) //
+  return await get(ref(database, 'admins')) //
     .then((snapshot) => {
       if (snapshot.exists()) {
         const admins = snapshot.val();
