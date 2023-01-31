@@ -5,6 +5,7 @@ import { BsFillPencilFill } from 'react-icons/bs';
 import { login, logout, onUserStateChange } from '../api/firebase';
 import User from './User';
 import { UserData } from '../utils/interfaces';
+import Button from './ui/Button';
 
 type UserDataType = UserData | null;
 
@@ -27,9 +28,14 @@ export default function Navbar() {
         <Link to="/products/new" className="text-2xl">
           <BsFillPencilFill />
         </Link>
+        {Boolean(user?.isAdmin) && (
+          <Link to="/products/new" className="text-2xl">
+            <BsFillPencilFill />
+          </Link>
+        )}
         {user && <User {...user} />}
-        {!user && <button onClick={login}>Login</button>}
-        {user && <button onClick={logout}>Logout</button>}
+        {!user && <Button onClick={login} text={'Login'} />}
+        {user && <Button onClick={logout} text={'Logout'} />}
       </nav>
     </header>
   );
