@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/return-await */
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,
@@ -8,6 +9,7 @@ import {
   User,
 } from 'firebase/auth';
 import { Dispatch, SetStateAction } from 'react';
+import { getDatabase, ref, get } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -23,6 +25,7 @@ type DispatchType = Dispatch<SetStateAction<User | null>>;
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
+const database = getDatabase(app);
 
 export async function login() {
   return await signInWithPopup(auth, provider).catch(console.error);
@@ -34,6 +37,21 @@ export async function logout() {
 
 export function onUserStateChange(callback: DispatchType) {
   onAuthStateChanged(auth, (user: User | null) => {
-    callback(user);
+    void (async () => {
+      const unpdatedUser = user ? await adminUser(user) : null;
+      callback(unpdatedUser);
+    })();
   });
+}
+
+async function adminUser(user: User) {
+  return get(ref(database, 'admins')) //
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const admins = snapshot.val();
+        const isAdmin = admins.includes(user?.uid);
+        return { ...user, isAdmin };
+      }
+      return user;
+    });
 }
