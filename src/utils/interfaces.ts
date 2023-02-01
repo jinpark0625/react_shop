@@ -1,3 +1,7 @@
-export interface UserData {
-  [key: string]: any;
+export interface ProductType {
+  title: string;
+  price: number;
+  category: string;
+  description: string;
+  options: string;
 }
