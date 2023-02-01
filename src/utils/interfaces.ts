@@ -4,4 +4,7 @@ export interface ProductType {
   category: string;
   description: string;
   options: string;
+  id?: string;
+  image?: string;
+  // map?:
 }
