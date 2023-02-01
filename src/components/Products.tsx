@@ -8,8 +8,7 @@ export default function Products() {
     isLoading,
     error,
     data: products,
-  }: // ProductType[] 배열형식으로 표시해야만이 map함수를 사용가능하다.
-  UseQueryResult<ProductType[], Error> = useQuery(['products'], getProducts);
+  }: UseQueryResult<ProductType[], Error> = useQuery(['products'], getProducts);
 
   return (
     <>
