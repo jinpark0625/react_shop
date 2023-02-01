@@ -9,7 +9,9 @@ import {
   UserCredential,
 } from 'firebase/auth';
 import { Dispatch, SetStateAction } from 'react';
-import { getDatabase, ref, get } from 'firebase/database';
+import { getDatabase, ref, set, get } from 'firebase/database';
+import { v4 as uuid } from 'uuid';
+import { ProductType } from 'utils/interfaces';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -58,4 +60,15 @@ async function adminUser(user: User) {
       }
       return user;
     });
+}
+
+export async function addNewProduct(product: ProductType, image: URL) {
+  const id: string = uuid();
+  return await set(ref(database, `products/${id}`), {
+    ...product,
+    id,
+    price: parseInt(`${product.price}`),
+    image,
+    options: product.options.split(','),
+  });
 }
