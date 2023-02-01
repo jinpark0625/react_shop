@@ -25,7 +25,7 @@ module.exports = {
   rules: {
     'react/react-in-jsx-scope': 'off',
     'tailwindcss/classnames-order': 'off',
-    'tailwindcss/no-custom-classname': 'error',
+    'tailwindcss/no-custom-classname': 'warn',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/strict-boolean-expressions': [
       'warn',
