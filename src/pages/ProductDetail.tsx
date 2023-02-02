@@ -1,6 +1,8 @@
 import { useState, ChangeEvent } from 'react';
 import { useLocation } from 'react-router-dom';
-import Button from 'components/ui/Button';
+import Button from '../components/ui/Button';
+import { SelectedProductType } from '../utils/interfaces';
+import useCart from '../hooks/useCart';
 
 const ProductDetail = () => {
   const { state } = useLocation();
@@ -9,14 +11,34 @@ const ProductDetail = () => {
     return <div>Error : product not found.</div>;
   }
 
-  const { image, title, description, category, price, options } = state.product;
+  // 리팩 추가
+  const { addOrUpdateItem } = useCart();
 
+  const { id, image, title, description, category, price, options } =
+    state.product;
+
+  const [success, setSuccess] = useState<string | null>(null);
   const [selected, setSelected] = useState(options?.[0]);
+
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) =>
     setSelected(e.target.value);
 
   const handleClick = () => {
-    // 여기서 장바구니에 추가하면됨
+    const product: SelectedProductType = {
+      id,
+      image,
+      title,
+      price,
+      option: selected,
+      quantity: 1,
+    };
+
+    addOrUpdateItem.mutate(product, {
+      onSuccess: () => {
+        setSuccess('장바구니에 추가되었습니다.');
+        setTimeout(() => setSuccess(null), 3000);
+      },
+    });
   };
 
   return (
@@ -34,7 +56,6 @@ const ProductDetail = () => {
             <label htmlFor="select" className="font-bold text-brand">
               옵션 :
             </label>
-            {/* List item이 변경되거나 수정되면 절대로 index를 사용하지않는다. 하지만 변경이 없을때는 괜찮다. */}
             <select
               className="m-4 flex-1 border-2 border-dashed border-brand p-2 outline-none"
               onChange={handleSelect}
@@ -46,6 +67,7 @@ const ProductDetail = () => {
               ))}
             </select>
           </div>
+          {success && <p className="my-2">{success}</p>}
           <Button text="장바구니에 추가" onClick={handleClick} />
         </div>
       </section>
