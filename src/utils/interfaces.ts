@@ -4,7 +4,15 @@ export interface ProductType {
   category: string;
   description: string;
   options: string;
-  id?: string;
+  id?: number;
   image?: string;
-  // map?:
+}
+
+export interface SelectedProductType {
+  id: number;
+  image: string;
+  title: string;
+  price: number;
+  option: string;
+  quantity: number;
 }
