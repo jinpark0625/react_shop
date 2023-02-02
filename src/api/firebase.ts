@@ -9,9 +9,9 @@ import {
   UserCredential,
 } from 'firebase/auth';
 import { Dispatch, SetStateAction } from 'react';
-import { getDatabase, ref, set, get } from 'firebase/database';
+import { getDatabase, ref, set, get, remove } from 'firebase/database';
 import { v4 as uuid } from 'uuid';
-import { ProductType } from 'utils/interfaces';
+import { ProductType, SelectedProductType } from '../utils/interfaces';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -74,10 +74,30 @@ export async function addNewProduct(product: ProductType, image: URL) {
 }
 
 export async function getProducts() {
-  return await get(ref(database, 'products')).then((snapshot) => {
-    if (snapshot.exists()) {
-      return Object.values(snapshot.val());
-    }
-    return [];
-  });
+  return await get(ref(database, 'products')) //
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        return Object.values(snapshot.val());
+      }
+      return [];
+    });
+}
+
+export async function getCart(userId: string) {
+  return await get(ref(database, `carts/${userId}`)) //
+    .then((snapshot) => {
+      const items = snapshot.val() || {};
+      return Object.values(items);
+    });
+}
+
+export async function addOrUpdateToCart(
+  userId: string,
+  product: SelectedProductType,
+) {
+  return await set(ref(database, `carts/${userId}/${product.id}`), product);
+}
+
+export async function removeFromCart(userId: string, productId: number) {
+  return await remove(ref(database, `carts/${userId}/${productId}`));
 }
