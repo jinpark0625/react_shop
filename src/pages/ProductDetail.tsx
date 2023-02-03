@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom';
 import Button from '../components/ui/Button';
 import { SelectedProductType } from '../utils/interfaces';
 import useCart from '../hooks/useCart';
+import { useAuthContext } from '../context/AuthContext';
+import { toast } from 'react-toast';
 
 const ProductDetail = () => {
   const { state } = useLocation();
@@ -11,7 +13,9 @@ const ProductDetail = () => {
     return <div>Error : product not found.</div>;
   }
 
-  // 리팩 추가
+  const { ...contextData } = useAuthContext();
+  const { user } = contextData;
+
   const { addOrUpdateItem } = useCart();
 
   const { id, image, title, description, category, price, options } =
@@ -24,6 +28,13 @@ const ProductDetail = () => {
     setSelected(e.target.value);
 
   const handleClick = () => {
+    if (user === null) {
+      toast.error('Oops! Login required to add to cart.', {
+        backgroundColor: '#e60022',
+      });
+      return;
+    }
+
     const product: SelectedProductType = {
       id,
       image,
