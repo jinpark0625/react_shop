@@ -24,11 +24,13 @@ const MyCart = () => {
   );
 
   return (
-    <section className="flex flex-col p-8">
-      <p className="border-b border-gray-300 pb-4 text-center text-2xl font-bold">
+    <section className="m-auto flex max-w-screen-2xl flex-col p-8">
+      <p className="border-b border-gray-300 pb-8 text-center text-2xl font-bold">
         My Cart
       </p>
-      {!hasProducts && <p>No products in the cart.</p>}
+      {!hasProducts && (
+        <p className="mt-12 text-center text-lg">No products in the cart.</p>
+      )}
       {hasProducts && (
         <>
           <ul className="mb-8 border-b border-gray-300 p-4 px-8">
@@ -36,17 +38,17 @@ const MyCart = () => {
               <CartItem key={product.id} product={product} />
             ))}
           </ul>
-          <div className="mb-6 flex items-center justify-between px-2 md:px-8 lg:px-16">
-            <PriceCard text="상품 총액" price={totalPrice} />
+          <div className="mb-8 flex items-center justify-between px-2 md:px-8 lg:px-16">
+            <PriceCard text="Product" price={totalPrice} />
             <BsFillPlusCircleFill className="shrink-0" />
-            <PriceCard text="배송액" price={SHIPPING} />
+            <PriceCard text="Shipping fee" price={SHIPPING} />
             <FaEquals className="shrink-0" />
             <PriceCard
-              text="총가격"
+              text="Total"
               price={totalPrice ? totalPrice + SHIPPING : SHIPPING}
             />
           </div>
-          <Button text="주문하기" />
+          <Button text="Order" />
         </>
       )}
     </section>
