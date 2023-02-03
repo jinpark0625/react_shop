@@ -4,6 +4,7 @@ import Button from '../components/ui/Button';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { ProductType } from '../utils/interfaces';
 import useProducts from '../hooks/useProducts';
+import { toast } from 'react-toast';
 
 const NewProduct = () => {
   const [product, setProduct] = useState<ProductType>({
@@ -15,7 +16,7 @@ const NewProduct = () => {
   });
   const [file, setFile] = useState<File | undefined>(undefined);
   const [isUploading, setIsUploading] = useState<boolean>(false);
-  const [sucess, setSucess] = useState<string | null>();
+  // const [sucess, setSucess] = useState<string | null>();
 
   const { addProduct } = useProducts();
 
@@ -37,10 +38,17 @@ const NewProduct = () => {
           { product, url },
           {
             onSuccess: () => {
-              setSucess('성공적으로 제품이 추가되었습니다.');
-              setTimeout(() => {
-                setSucess(null);
-              }, 4000);
+              toast.success('The product has been added successfully.', {
+                backgroundColor: '#008000',
+              });
+            },
+            onError: () => {
+              toast.error(
+                'Oops! The product has not been added successfully.',
+                {
+                  backgroundColor: '#e60022',
+                },
+              );
             },
           },
         );
@@ -53,8 +61,7 @@ const NewProduct = () => {
 
   return (
     <section className="w-full text-center">
-      <h2 className="my-4 text-2xl font-bold">새로운 제품 등록</h2>
-      {sucess && <p className="my-2">{sucess}</p>}
+      <h2 className="py-8 text-2xl font-bold">Add new product</h2>
       {file && (
         <img
           className="mx-auto mb-2 w-96"
@@ -74,7 +81,7 @@ const NewProduct = () => {
           type="text"
           name="title"
           value={product.title ?? ''}
-          placeholder="제품명"
+          placeholder="Title"
           required
           onChange={handleChange}
         />
@@ -82,7 +89,7 @@ const NewProduct = () => {
           type="number"
           name="price"
           value={product.price ?? ''}
-          placeholder="가격"
+          placeholder="Price"
           required
           onChange={handleChange}
         />
@@ -90,7 +97,7 @@ const NewProduct = () => {
           type="text"
           name="category"
           value={product.category ?? ''}
-          placeholder="카테고리"
+          placeholder="Category"
           required
           onChange={handleChange}
         />
@@ -98,7 +105,7 @@ const NewProduct = () => {
           type="text"
           name="description"
           value={product.description ?? ''}
-          placeholder="제품 설명"
+          placeholder="Description"
           required
           onChange={handleChange}
         />
@@ -106,12 +113,13 @@ const NewProduct = () => {
           type="text"
           name="options"
           value={product.options ?? ''}
-          placeholder="옵션들(콤마(,)로 구분)"
+          placeholder="Options(Separate with a comma (,))"
           required
           onChange={handleChange}
+          className="mb-8"
         />
         <Button
-          text={isUploading ? '업로드중...' : '제품 등록하기'}
+          text={isUploading ? 'Uploading...' : 'Add product'}
           disabled={isUploading}
         />
       </form>
