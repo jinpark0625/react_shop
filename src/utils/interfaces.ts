@@ -16,3 +16,12 @@ export interface SelectedProductType {
   option: string;
   quantity: number;
 }
+
+type imageType = FileList | null;
+export interface AccountInputs {
+  email: string;
+  name: string;
+  password: string;
+  confirmPassword: string;
+  image: imageType;
+}
