@@ -8,8 +8,7 @@ A practice project built with React.js, Typescript, Firebase, Cloudinary, react-
 2. [Key Features](#key-features)
 3. [Preview](#preview)
 4. [Technical Skills](#technical-skills)
-5. [Releases](#v0.1.0)
-6. [Future Development](#future-development)
+5. [Future Development](#future-development)
 
 ## Installation
 
@@ -50,6 +49,12 @@ If you enter yarn start, your browser open http://localhost:3000/.
 - Mobile-responsive design using tailwind-css
 - Custom hooks created with react-query to efficiently fetch data and keep the user interface smooth and responsive.
 
+### v0.1.0
+- Sign up new users with email
+- Update a user's profile: Users can update their profile information.
+- Upload file with firebase storage
+- Form validation: The application includes form validation to ensure that users provide accurate and complete information when signing up or updating their profile
+
 <br/>
 
 ## Technical Skills
@@ -63,38 +68,35 @@ If you enter yarn start, your browser open http://localhost:3000/.
 
 <br/>
 
-## v0.1.0
-### Features
-- Sign up new users with email
-- Update a user's profile: Users can update their profile information.
-- Upload file with firebase storage
-- Form validation: The application includes form validation to ensure that users provide accurate and complete information when signing up or updating their profile
+## Preview
+
+- Login
+
+<img width="800" alt="1" src="https://user-images.githubusercontent.com/69961780/218191492-721ceee3-6322-4116-aaea-7b4233a45371.jpg">
 
 <br/>
 
-## Preview
+- Register
 
-- login
-
-![login (2)](https://user-images.githubusercontent.com/69961780/216543264-d1849a74-deb9-4520-a049-d6e0c7913c6a.gif)
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/69961780/218193003-1dd74c69-383e-4b5d-bcdd-2adb4ae7818d.gif)
 
 <br/>
 
 - Login required for cart
 
-![cartfailed (1)](https://user-images.githubusercontent.com/69961780/216543388-84d313ac-4e21-4e04-b63d-be43cb2f01a6.gif)
+<img width="800" alt="1" src="https://user-images.githubusercontent.com/69961780/216543388-84d313ac-4e21-4e04-b63d-be43cb2f01a6.gif">
 
 <br/>
 
 - Add cart
 
-![addCart (1)](https://user-images.githubusercontent.com/69961780/216543412-394929af-826b-4c15-9e35-c8d090f900d5.gif)
+<img width="800" alt="1" src="https://user-images.githubusercontent.com/69961780/216543412-394929af-826b-4c15-9e35-c8d090f900d5.gif">
 
 <br/>
 
 - Add new item
 
-<img width="1669" alt="addnew" src="https://user-images.githubusercontent.com/69961780/216533353-c1da824e-93fa-4236-a52d-fc9a21ade124.png">
+<img width="800" alt="1" src="https://user-images.githubusercontent.com/69961780/216533353-c1da824e-93fa-4236-a52d-fc9a21ade124.png">
 
 <br/>
 
