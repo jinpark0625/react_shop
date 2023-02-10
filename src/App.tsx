@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import { AuthContextProvider } from 'context/AuthContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ToastContainer } from 'react-toast';
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const queryClient = new QueryClient();
 
@@ -15,6 +16,7 @@ export default function App() {
         <Outlet />
         <ToastContainer delay={3000} position="top-right" />
       </AuthContextProvider>
+      {/* <ReactQueryDevtools initialIsOpen={true} /> */}
     </QueryClientProvider>
   );
 }
