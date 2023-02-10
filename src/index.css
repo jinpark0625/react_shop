@@ -21,6 +21,40 @@ code {
     monospace;
 }
 
-input {
+/* input {
   @apply my-1 border border-gray-300 p-4 outline-none;
+} */
+
+input {
+  @apply border border-gray-300 p-4 outline-none;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-4px);
+  }
+  20% {
+    transform: translateX(4px);
+  }
+  30% {
+    transform: translateX(-4px);
+  }
+  40% {
+    transform: translateX(4px);
+  }
+  50% {
+    transform: translateX(-4px);
+  }
+  60% {
+    transform: translateX(0);
+  }
+}
+
+@layer utilities {
+  .animate-shake {
+    animation: shake 0.5s;
+  }
 }
