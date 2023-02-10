@@ -4,12 +4,19 @@ A practice project built with React.js, Typescript, Firebase, Cloudinary, react-
 
 ## Installation
 
-`yarn`
+```
+yarn
+```
 
 ## Usage
 
-`yarn run start`
+```
+yarn run start
+```
+
 If you enter yarn start, your browser open http://localhost:3000/.
+
+<br/>
 
 ## Directory Structure
 
@@ -24,6 +31,8 @@ If you enter yarn start, your browser open http://localhost:3000/.
     └── services
 ```
 
+<br/>
+
 ## Key Features
 
 - Firebase authentication for secure user log-in
@@ -32,16 +41,44 @@ If you enter yarn start, your browser open http://localhost:3000/.
 - Mobile-responsive design using tailwind-css
 - Custom hooks created with react-query to efficiently fetch data and keep the user interface smooth and responsive.
 
+<br/>
+
 ## Technical Skills
 
-Main Library : React
-Main Language and Syntax : Typescript, Javascript ES6+, JSX
-State Managemen : useContext
-Server : firebase
-UI Library: Tailwind css, React-icons
-Others : git, Babel, eslint, prettier, React-query
+<b>Main Library</b> : React <br/>
+<b>Main Language and Syntax</b> : Typescript, Javascript ES6+, JSX <br/>
+<b>State Managemen</b> : useContext <br/>
+<b>Server</b> : firebase <br/>
+<b>UI Library</b> : Tailwind css, React-icons <br/>
+<b>Others</b> : git, Babel, eslint, prettier, React-query <br/>
+
+<br/>
 
 ## Preview
+
+- login
+
+![login (2)](https://user-images.githubusercontent.com/69961780/216543264-d1849a74-deb9-4520-a049-d6e0c7913c6a.gif)
+
+<br/>
+
+- Login required for cart
+
+![cartfailed (1)](https://user-images.githubusercontent.com/69961780/216543388-84d313ac-4e21-4e04-b63d-be43cb2f01a6.gif)
+
+<br/>
+
+- Add cart
+
+![addCart (1)](https://user-images.githubusercontent.com/69961780/216543412-394929af-826b-4c15-9e35-c8d090f900d5.gif)
+
+<br/>
+
+- Add new item
+
+<img width="1669" alt="addnew" src="https://user-images.githubusercontent.com/69961780/216533353-c1da824e-93fa-4236-a52d-fc9a21ade124.png">
+
+<br/>
 
 ## Future Development
 
