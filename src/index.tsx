@@ -11,6 +11,8 @@ import NewProduct from './pages/NewProduct';
 import MyCart from './pages/MyCart';
 import NotFound from './pages/NotFound';
 import ProtectedRoute from './pages/ProtectedRoute';
+import Register from './pages/Register';
+import Login from './pages/Login';
 
 const router = createBrowserRouter([
   {
@@ -47,6 +49,8 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      { path: '/register', element: <Register /> },
+      { path: '/login', element: <Login /> },
     ],
   },
 ]);
