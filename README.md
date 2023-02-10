@@ -8,7 +8,8 @@ A practice project built with React.js, Typescript, Firebase, Cloudinary, react-
 2. [Key Features](#key-features)
 3. [Preview](#preview)
 4. [Technical Skills](#technical-skills)
-5. [Future Development](#future-development)
+5. [Releases](#v0.1.0)
+6. [Future Development](#future-development)
 
 ## Installation
 
