@@ -10,8 +10,9 @@ interface RouteProps {
 export default function ProtectedRoute({ children, requireAdmin }: RouteProps) {
   const { ...contextData } = useAuthContext();
   const { user } = contextData;
+
   const userData = user ?? null;
-  const isAdmin = userData ? 'isAdmin' in userData : null;
+  const isAdmin = userData?.isAdmin;
 
   if (!userData || (requireAdmin && !isAdmin)) {
     return <Navigate to="/" replace />;
