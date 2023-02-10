@@ -58,7 +58,16 @@ If you enter yarn start, your browser open http://localhost:3000/.
 <b>State Managemen</b> : useContext <br/>
 <b>Server</b> : firebase <br/>
 <b>UI Library</b> : Tailwind css, React-icons <br/>
-<b>Others</b> : git, Babel, eslint, prettier, React-query <br/>
+<b>Others</b> : git, Babel, eslint, prettier, React-query, React-hook-form <br/>
+
+<br/>
+
+## v0.1.0
+### Features
+- Sign up new users with email
+- Update a user's profile: Users can update their profile information.
+- Upload file with firebase storage
+- Form validation: The application includes form validation to ensure that users provide accurate and complete information when signing up or updating their profile
 
 <br/>
 
@@ -92,7 +101,7 @@ If you enter yarn start, your browser open http://localhost:3000/.
 
 This project is in its early stages of development, with future plans to implement additional features such as:
 
-- Membership and login through node.js
+- ~~Membership and login through firebase storage~~
 - Integration with ChatGPT for enhanced user experience
 - Improved product diffusion with Stable Diffusion technolog
 - Enhance the website's UI, making it even more visually appealing and user-friendly.
