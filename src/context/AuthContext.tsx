@@ -4,15 +4,18 @@ import {
   useState,
   useEffect,
   ReactNode,
+  SetStateAction,
+  Dispatch,
 } from 'react';
-import { onUserStateChange, login, logout } from '../api/firebase';
+import { onUserStateChange, login } from '../api/firebase';
 import { User, UserCredential } from 'firebase/auth';
 
 interface ContextState {
-  user?: User | null;
+  user?: (User & { isAdmin?: boolean }) | null;
   uid: string;
   login: () => Promise<undefined | UserCredential>;
-  logout: () => Promise<void>;
+
+  setUser: Dispatch<SetStateAction<User | null>>;
 }
 
 interface AuthProps {
@@ -30,7 +33,12 @@ export function AuthContextProvider({ children }: AuthProps) {
 
   return (
     <AuthContext.Provider
-      value={{ user, uid: user ? user.uid : '', login, logout }}
+      value={{
+        setUser,
+        user,
+        uid: user ? user.uid : '',
+        login,
+      }}
     >
       {children}
     </AuthContext.Provider>
