@@ -2,6 +2,14 @@
 
 A practice project built with React.js, Typescript, Firebase, Cloudinary, react-query, and tailwind-css, this e-commerce website allows users to log in and shop for products. Currently, the top administrator has the ability to register new products, and all users can view and manage the products in their cart through Firebase real-time database.
 
+## table of contents
+
+1. [Installation](#installation)
+2. [Key Features](#key-features)
+3. [Preview](#preview)
+4. [Technical Skills](#technical-skills)
+5. [Future Development](#future-development)
+
 ## Installation
 
 ```
