@@ -2,10 +2,10 @@ import Button from 'components/ui/Button';
 import { useForm } from 'react-hook-form';
 import Input from 'components/ui/Input';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../context/AuthContext';
 import { FcGoogle } from 'react-icons/fc';
 import Loading from '../components/ui/Loading';
 import useUser from '../hooks/useUser';
+import AuthImageContainer from 'components/ui/AuthImageContainer';
 
 const EMAIL_REGEX =
   /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -16,10 +16,7 @@ interface IProps {
 }
 
 export default function Login() {
-  const { ...contextData } = useAuthContext();
-  const { login } = contextData;
-
-  const { loginQuery } = useUser();
+  const { loginQuery, loginGoogleQuery } = useUser();
 
   const navigate = useNavigate();
 
@@ -35,6 +32,26 @@ export default function Login() {
       password: '',
     },
   });
+
+  const googleLogin = () => {
+    loginGoogleQuery.mutate(undefined, {
+      onSuccess: () => {
+        navigate('/');
+      },
+      onError: (err) => {
+        if (String(err).indexOf('wrong-password')) {
+          setError(
+            'password',
+            {
+              message:
+                'An unexpected error occurred. Please try loggin in again.',
+            },
+            { shouldFocus: true },
+          );
+        }
+      },
+    });
+  };
 
   const submit = (data: IProps) => {
     const { email, password } = data;
@@ -59,16 +76,16 @@ export default function Login() {
   };
 
   return (
-    <section className="m-auto flex h-[calc(100vh-88px)]  items-center">
+    <section className="m-auto flex h-[calc(100vh-92px)] items-center">
       {loginQuery.isLoading && <Loading />}
-      <div className="w-2/5 grow flex-col items-center">
+      <div className="flex h-full w-2/5 grow flex-col items-center justify-center bg-white shadow-slate-50 drop-shadow-md">
         <div className="mb-14 flex-col items-center text-center">
           <h2 className="mb-2 text-3xl font-bold">Hello Again!</h2>
           <p className="text-slate-500">
             Welcome back! Please enter your detail.
           </p>
         </div>
-        <div className="flex flex-col items-center">
+        <div className="flex w-full flex-col items-center">
           <form
             className="flex w-full max-w-sm flex-col"
             onSubmit={handleSubmit((data) => submit(data))}
@@ -110,26 +127,28 @@ export default function Login() {
             <Button
               text="Login"
               disabled={isSubmitting}
-              className="rounded-lg bg-neutral-800 py-4 px-4"
+              className="rounded-lg bg-sky-500 py-4 hover:bg-sky-600 hover:shadow-md hover:shadow-sky-500 "
             />
           </form>
           <Button
             text="Sign with Google"
-            onClick={login}
+            onClick={googleLogin}
             icon={() => <FcGoogle className="mr-2 text-2xl" />}
-            className="mt-6 w-full max-w-sm rounded-lg border border-gray-300 py-4 px-4 text-slate-500"
+            className="mt-6 w-full max-w-sm rounded-lg border border-gray-300 bg-white py-4 text-slate-500  hover:shadow-md"
           />
           <div className="mt-10 text-slate-500">
             Don&#39;t have an account yet?
-            <Link to="/register" className="p-2 text-zinc-900">
+            <Link to="/register" className="p-2 text-sky-500">
               Sign Up
             </Link>
           </div>
         </div>
       </div>
-      <div className="hidden h-full w-3/5 p-4 lg:block">
-        <div className="h-full rounded-3xl bg-login bg-cover"></div>
-      </div>
+      <AuthImageContainer
+        image="/images/login.webp"
+        firstText="Shop Smarter,"
+        secondText="Login Here"
+      />
     </section>
   );
 }

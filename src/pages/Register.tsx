@@ -6,6 +6,7 @@ import { AccountInputs } from 'utils/interfaces';
 import ImageInput from '../components/ui/ImageInput';
 import Loading from '../components/ui/Loading';
 import useUser from '../hooks/useUser';
+import AuthImageContainer from 'components/ui/AuthImageContainer';
 
 const EMAIL_REGEX =
   /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -77,7 +78,7 @@ export default function Register() {
   return (
     <section className="m-auto flex h-[calc(100vh-88px)]  items-center">
       {signUpQuery.isLoading && <Loading />}
-      <div className="w-2/5 grow flex-col items-center">
+      <div className="flex h-full w-2/5 grow flex-col items-center justify-center bg-white shadow-slate-50 drop-shadow-md">
         <div className="mb-14 flex-col items-center text-center">
           <h2 className="mb-2 text-3xl font-bold">Get started</h2>
           <p className="text-slate-500">Create your account now.</p>
@@ -163,20 +164,23 @@ export default function Register() {
             <Button
               text="Create account"
               disabled={isSubmitting}
-              className="rounded-lg bg-neutral-800 py-4 px-4"
+              className="rounded-lg bg-sky-500 py-4 hover:bg-sky-600 hover:shadow-md hover:shadow-sky-500"
             />
           </form>
           <div className="mt-10 text-slate-500">
             Already have an account?
-            <Link to="/login" className="p-2 text-zinc-900">
+            <Link to="/login" className="p-2 text-sky-500">
               Log in
             </Link>
           </div>
         </div>
       </div>
-      <div className="hidden h-full w-3/5 p-4 lg:block">
-        <div className="h-full rounded-3xl bg-login bg-cover"></div>
-      </div>
+      <AuthImageContainer
+        image="/images/register.webp"
+        register
+        firstText="Unlock the Shopping World,"
+        secondText="Register Today"
+      />
     </section>
   );
 }
