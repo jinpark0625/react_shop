@@ -13,7 +13,15 @@ import {
   Auth,
 } from 'firebase/auth';
 import { Dispatch, SetStateAction } from 'react';
-import { getDatabase, ref, set, get, remove } from 'firebase/database';
+import {
+  getDatabase,
+  ref,
+  set,
+  get,
+  remove,
+  query,
+  limitToLast,
+} from 'firebase/database';
 import { v4 as uuid } from 'uuid';
 import { ProductType, SelectedProductType } from '../utils/interfaces';
 import {
@@ -34,6 +42,7 @@ const firebaseConfig = {
 
 // type
 type DispatchType = Dispatch<SetStateAction<User | null>>;
+type setLoading = Dispatch<SetStateAction<boolean>>;
 
 type ImageType = FileList | null | undefined;
 type ImageBlob = Blob | Uint8Array | ArrayBuffer;
@@ -80,13 +89,22 @@ export async function logout(): Promise<void> {
   await signOut(auth).catch(console.error);
 }
 
-export function onUserStateChange(callback: DispatchType) {
+export function onUserStateChange(
+  callback: DispatchType,
+  setLoading: setLoading,
+) {
   onAuthStateChanged(auth, (user: User | null) => {
     if (user) {
       adminUser(user)
-        .then((res) => callback(res))
+        .then((res) => {
+          callback(res);
+          setLoading(false);
+        })
         .catch(console.log);
-    } else callback(null);
+    } else {
+      callback(null);
+      setLoading(false);
+    }
   });
 }
 
@@ -114,8 +132,18 @@ export async function addNewProduct(product: ProductType, image: URL) {
   });
 }
 
-export async function getProducts() {
-  return await get(ref(database, 'products')) //
+export async function getProducts(key: string) {
+  return await get(ref(database, key)) //
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        return Object.values(snapshot.val());
+      }
+      return [];
+    });
+}
+
+export async function getNFTs(key: string) {
+  return await get(query(ref(database, key), limitToLast(10))) //
     .then((snapshot) => {
       if (snapshot.exists()) {
         return Object.values(snapshot.val());
