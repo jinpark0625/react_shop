@@ -1,6 +1,6 @@
-# React E-commerce Website
-
-A practice project built with React.js, Typescript, Firebase, Cloudinary, react-query, and tailwind-css, this e-commerce website allows users to log in and shop for products. Currently, the top administrator has the ability to register new products, and all users can view and manage the products in their cart through Firebase real-time database.
+# Happy Jolly
+<img width="1304" alt="스크린샷 2023-02-20 오전 2 56 41" src="https://user-images.githubusercontent.com/69961780/220046017-7c1536c2-f7f3-4903-845b-acd6ec579a1e.png">
+Happy Jolly built with React.js, Typescript, Firebase, Cloudinary, react-query, and tailwind-css, this e-commerce website allows users to log in and shop for products. Currently, the top administrator has the ability to register new products, and all users can view and manage the products in their cart through Firebase real-time database.
 
 ## table of contents
 
@@ -23,21 +23,6 @@ yarn run start
 ```
 
 If you enter yarn start, your browser open http://localhost:3000/.
-
-<br/>
-
-## Directory Structure
-
-```
-└── src
-    ├── api
-    ├── components
-        └── ui
-    ├── context
-    ├── hooks
-    ├── pages
-    └── services
-```
 
 <br/>
 
@@ -70,41 +55,24 @@ If you enter yarn start, your browser open http://localhost:3000/.
 
 ## Preview
 
-- Login
+### v0.1.0
+| Register Page | Login required for cart |
+| --- | --- |
+| <img width="450" height="260" alt="1" src="https://user-images.githubusercontent.com/69961780/218193003-1dd74c69-383e-4b5d-bcdd-2adb4ae7818d.gif"> | <img width="450" height="260" alt="1" src="https://user-images.githubusercontent.com/69961780/216543388-84d313ac-4e21-4e04-b63d-be43cb2f01a6.gif"> | 
+| Add cart | Add new item |
+| <img width="450" height="260" alt="1" src="https://user-images.githubusercontent.com/69961780/216543412-394929af-826b-4c15-9e35-c8d090f900d5.gif"> | <img width="450" height="260" alt="1" src="https://user-images.githubusercontent.com/69961780/216533353-c1da824e-93fa-4236-a52d-fc9a21ade124.png"> | 
 
-<img width="800" alt="1" src="https://user-images.githubusercontent.com/69961780/218191492-721ceee3-6322-4116-aaea-7b4233a45371.jpg">
-
-<br/>
-
-- Register
-
-![ezgif com-video-to-gif](https://user-images.githubusercontent.com/69961780/218193003-1dd74c69-383e-4b5d-bcdd-2adb4ae7818d.gif)
-
-<br/>
-
-- Login required for cart
-
-<img width="800" alt="1" src="https://user-images.githubusercontent.com/69961780/216543388-84d313ac-4e21-4e04-b63d-be43cb2f01a6.gif">
-
-<br/>
-
-- Add cart
-
-<img width="800" alt="1" src="https://user-images.githubusercontent.com/69961780/216543412-394929af-826b-4c15-9e35-c8d090f900d5.gif">
-
-<br/>
-
-- Add new item
-
-<img width="800" alt="1" src="https://user-images.githubusercontent.com/69961780/216533353-c1da824e-93fa-4236-a52d-fc9a21ade124.png">
-
-<br/>
+### v0.2.0
+| Landing Page | Store Navigation |
+| :---: | :---: |
+| <img width="450" height="260" alt="1" src="https://user-images.githubusercontent.com/69961780/220048658-a527ff02-9028-4219-b545-55887139e331.gif"> | <img width="450" height="260" alt="1" src="https://user-images.githubusercontent.com/69961780/220048933-e72a8bc5-910a-4c4a-81f7-08ddce79e0ce.png"> | 
+| Landing Page (Mobile) |
+| <img width="450" height="260" alt="1" src="https://user-images.githubusercontent.com/69961780/220049195-2f69991e-8bc3-4ecd-b1bf-144e2a51c5b5.png"> |
 
 ## Future Development
 
 This project is in its early stages of development, with future plans to implement additional features such as:
 
 - ~~Membership and login through firebase storage~~
-- Integration with ChatGPT for enhanced user experience
-- Improved product diffusion with Stable Diffusion technolog
-- Enhance the website's UI, making it even more visually appealing and user-friendly.
+- ~~Enhance the website's UI, making it even more visually appealing and user-friendly.~~
+- Get NFT Metadata and Update user's contract address
