@@ -7,15 +7,15 @@ import {
   SetStateAction,
   Dispatch,
 } from 'react';
-import { onUserStateChange, login } from '../api/firebase';
-import { User, UserCredential } from 'firebase/auth';
+import { onUserStateChange } from '../api/firebase';
+import { User } from 'firebase/auth';
 
 interface ContextState {
   user?: (User & { isAdmin?: boolean }) | null;
   uid: string;
-  login: () => Promise<undefined | UserCredential>;
-
   setUser: Dispatch<SetStateAction<User | null>>;
+  loading: boolean;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 interface AuthProps {
@@ -26,18 +26,20 @@ export const AuthContext = createContext<ContextState | null>(null);
 
 export function AuthContextProvider({ children }: AuthProps) {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    onUserStateChange(setUser);
+    onUserStateChange(setUser, setLoading);
   }, []);
 
   return (
     <AuthContext.Provider
       value={{
+        setLoading,
+        loading,
         setUser,
         user,
         uid: user ? user.uid : '',
-        login,
       }}
     >
       {children}
