@@ -63,7 +63,7 @@ If you enter yarn start, your browser open http://localhost:3000/.
 ### v0.1.0
 | Register Page | Login required for cart |
 | --- | --- |
-| <img width="300" height="260" alt="1" src="https://user-images.githubusercontent.com/69961780/218193003-1dd74c69-383e-4b5d-bcdd-2adb4ae7818d.gif"> | <img width="300" height="260" alt="1" src="https://user-images.githubusercontent.com/69961780/216543388-84d313ac-4e21-4e04-b63d-be43cb2f01a6.gif"> | 
+| <img width="100%" height="260" alt="1" src="https://user-images.githubusercontent.com/69961780/218193003-1dd74c69-383e-4b5d-bcdd-2adb4ae7818d.gif"> | <img width="100%" height="260" alt="1" src="https://user-images.githubusercontent.com/69961780/216543388-84d313ac-4e21-4e04-b63d-be43cb2f01a6.gif"> | 
 | Add cart | Add new item |
 | <img width="450" height="260" alt="1" src="https://user-images.githubusercontent.com/69961780/216543412-394929af-826b-4c15-9e35-c8d090f900d5.gif"> | <img width="450" height="260" alt="1" src="https://user-images.githubusercontent.com/69961780/216533353-c1da824e-93fa-4236-a52d-fc9a21ade124.png"> | 
 
