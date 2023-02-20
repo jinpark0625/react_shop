@@ -15,10 +15,9 @@ interface NewProductType {
 export default function useProducts() {
   const queryClient = useQueryClient();
 
-  // 기존의 getProducts 부분
   const productsQuery: UseQueryResult<ProductType[], Error> = useQuery(
     ['products'],
-    fetchProdcuts,
+    async () => await fetchProdcuts('products'),
     {
       staleTime: 1000 * 60,
     },
@@ -32,6 +31,5 @@ export default function useProducts() {
     },
   );
 
-  // 필요한 hook 만 return
   return { productsQuery, addProduct };
 }
