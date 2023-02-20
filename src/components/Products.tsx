@@ -14,9 +14,9 @@ export default function Products() {
         Find your favourite item
       </h2>
       <ul className=" grid  grid-cols-1 gap-6  md:grid-cols-3 lg:grid-cols-4">
-        {products?.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+        {products?.map((product, i) => {
+          return <ProductCard key={i} product={product} />;
+        })}
       </ul>
     </div>
   );
