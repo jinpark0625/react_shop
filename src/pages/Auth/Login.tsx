@@ -36,7 +36,7 @@ export default function Login() {
   const googleLogin = () => {
     loginGoogleQuery.mutate(undefined, {
       onSuccess: () => {
-        navigate('/');
+        navigate('/', { replace: true });
       },
       onError: (err) => {
         if (String(err).indexOf('wrong-password')) {

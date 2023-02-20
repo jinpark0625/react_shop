@@ -41,7 +41,7 @@ export default function Register() {
       { email, name, password, image },
       {
         onSuccess: () => {
-          navigate('/');
+          navigate('/', { replace: true });
         },
         onError: (err) => {
           if (String(err).indexOf('email-already-in-use')) {
