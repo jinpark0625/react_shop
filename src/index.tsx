@@ -4,15 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from './pages/Home';
-import AllProdocuts from './pages/AllProducts';
-import ProductDetail from './pages/ProductDetail';
-import NewProduct from './pages/NewProduct';
-import MyCart from './pages/MyCart';
+import Home from './pages/Home/Home';
+import Category from './pages/Product/Category';
+import Product from './pages/Product/Product';
+import NewProduct from './pages/Admin/NewProduct';
+import MyCart from './pages/User/MyCart';
 import NotFound from './pages/NotFound';
 import ProtectedRoute from './pages/ProtectedRoute';
-import Register from './pages/Register';
-import Login from './pages/Login';
+import Register from './pages/Auth/Register';
+import AuthProtectedRoute from 'pages/AuthProtectedRoute';
+import Login from './pages/Auth/Login';
 
 const router = createBrowserRouter([
   {
@@ -26,11 +27,11 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/products',
-        element: <AllProdocuts />,
+        path: '/category',
+        element: <Category />,
       },
       {
-        path: '/products/new',
+        path: '/addProduct',
         element: (
           <ProtectedRoute requireAdmin>
             <NewProduct />
@@ -38,19 +39,33 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/products/:id',
-        element: <ProductDetail />,
+        path: '/product/:id',
+        element: <Product />,
       },
       {
         path: '/carts',
         element: (
-          <ProtectedRoute>
-            <MyCart />
-          </ProtectedRoute>
+          // <ProtectedRoute>
+          <MyCart />
+          // </ProtectedRoute>
         ),
       },
-      { path: '/register', element: <Register /> },
-      { path: '/login', element: <Login /> },
+      {
+        path: '/register',
+        element: (
+          <AuthProtectedRoute>
+            <Register />
+          </AuthProtectedRoute>
+        ),
+      },
+      {
+        path: '/login',
+        element: (
+          <AuthProtectedRoute>
+            <Login />
+          </AuthProtectedRoute>
+        ),
+      },
     ],
   },
 ]);
