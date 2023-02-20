@@ -1,4 +1,3 @@
-import { AiOutlineShoppingCart } from 'react-icons/ai';
 import useCart from '../hooks/useCart';
 
 export default function CartStatus() {
@@ -7,12 +6,15 @@ export default function CartStatus() {
   } = useCart();
 
   return (
-    <div className="relative">
-      <AiOutlineShoppingCart className="text-4xl" />
-      {products && (
-        <p className="absolute -top-1 -right-2 h-6 w-6 rounded-full bg-brand text-center font-bold text-white">
+    <div className="relative mr-6">
+      {products ? (
+        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
           {products.length}
-        </p>
+        </span>
+      ) : (
+        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
+          0
+        </span>
       )}
     </div>
   );
