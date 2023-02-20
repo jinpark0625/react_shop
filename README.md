@@ -89,11 +89,32 @@ If you enter yarn start, your browser open http://localhost:3000/.
 </table>
 
 ### v0.2.0
-| Landing Page | Store Navigation |
-| :---: | :---: |
-| <img width="450" height="260" alt="1" src="https://user-images.githubusercontent.com/69961780/220048658-a527ff02-9028-4219-b545-55887139e331.gif"> | <img width="450" height="260" alt="1" src="https://user-images.githubusercontent.com/69961780/220048933-e72a8bc5-910a-4c4a-81f7-08ddce79e0ce.png"> | 
-| Landing Page (Mobile) | Login Page |
-| <img width="450" height="260" alt="1" src="https://user-images.githubusercontent.com/69961780/220049195-2f69991e-8bc3-4ecd-b1bf-144e2a51c5b5.png"> | <img width="450" height="260" alt="스크린샷 2023-02-20 오전 3 15 15" src="https://user-images.githubusercontent.com/69961780/220049749-55065938-176c-4d5a-a817-96e8e2ae8245.png"> |
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="50%">Landing Page</th>
+      <th width="50%">Store Navigation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td width="50%"><img src="https://user-images.githubusercontent.com/69961780/220048658-a527ff02-9028-4219-b545-55887139e331.gif"/></td>
+      <td width="50%"><img src="https://user-images.githubusercontent.com/69961780/220048933-e72a8bc5-910a-4c4a-81f7-08ddce79e0ce.png"/></td>
+    </tr>
+  </tbody>
+    <thead>
+    <tr>
+      <th width="50%">Landing Page (Mobile)</th>
+      <th width="50%">Login Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td width="50%"><img src="https://user-images.githubusercontent.com/69961780/220049195-2f69991e-8bc3-4ecd-b1bf-144e2a51c5b5.png"/></td>
+      <td width="50%"><img src="https://user-images.githubusercontent.com/69961780/220049749-55065938-176c-4d5a-a817-96e8e2ae8245.png"/></td>
+    </tr>
+  </tbody>
+</table>
 
 ## Future Development
 
