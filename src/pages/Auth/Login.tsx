@@ -76,9 +76,9 @@ export default function Login() {
   };
 
   return (
-    <section className="m-auto flex h-[calc(100vh-92px)] items-center">
+    <section className="m-auto grid min-h-[calc(100vh-64px)] grid-cols-10">
       {loginQuery.isLoading && <Loading />}
-      <div className="flex h-full w-2/5 grow flex-col items-center justify-center bg-white shadow-slate-50 drop-shadow-md">
+      <div className="col-span-10 flex h-full w-full grow flex-col items-center justify-center bg-white shadow-slate-50 drop-shadow-md lg:col-span-4">
         <div className="mb-14 flex-col items-center text-center">
           <h2 className="mb-2 text-3xl font-bold">Hello Again!</h2>
           <p className="text-slate-500">
