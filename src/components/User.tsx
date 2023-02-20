@@ -1,10 +1,15 @@
-import { User as UserType } from 'firebase/auth';
+interface UserType {
+  displayName?: string | null;
+  photoURL?: string | null;
+  mobile: boolean;
+}
 
-export default function User({ displayName, photoURL }: UserType) {
+export default function User({ displayName, photoURL, mobile }: UserType) {
   return (
-    <div className="flex shrink-0 items-center">
+    <>
+      {!mobile && <p className="mr-2">{displayName}</p>}
       <img
-        className="mr-2 h-10 w-10 rounded-full"
+        className="h-10 w-10 rounded-full border border-gray-300"
         src={
           photoURL === 'default' || !photoURL
             ? '/images/default_image.webp'
@@ -12,7 +17,7 @@ export default function User({ displayName, photoURL }: UserType) {
         }
         alt={displayName ?? 'Anonymous'}
       />
-      <span className="hidden md:block">{displayName}</span>
-    </div>
+      {mobile && <p className="ml-2">{displayName}</p>}
+    </>
   );
 }
