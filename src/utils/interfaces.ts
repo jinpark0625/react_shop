@@ -8,6 +8,16 @@ export interface ProductType {
   image?: string;
 }
 
+export interface NftType {
+  Background: string;
+  Body: string;
+  Eyes: string;
+  Hat: string;
+  Nose: string;
+  Title: string;
+  image: string;
+}
+
 export interface SelectedProductType {
   id: number;
   image: string;
