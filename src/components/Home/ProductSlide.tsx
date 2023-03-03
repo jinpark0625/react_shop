@@ -6,13 +6,13 @@ import ImagePlaceholder from '../ui/ImagePlaceholder';
 import {
   PRODUCT_BREAK_POINTS,
   PRODUCT_LOADING_ARRAY,
-} from '../../utils/slideOptions';
+} from '../../data/Home/slideOptions';
 import ProductCard from '../ui/ProductCard';
 import { useNavigate } from 'react-router-dom';
 
 export default function ProductSlide() {
   const {
-    productsQuery: { isLoading, data: products },
+    productSlideQuery: { isLoading, error, data: products },
   } = useProducts();
 
   const navigate = useNavigate();
@@ -49,6 +49,11 @@ export default function ProductSlide() {
               <ImagePlaceholder />
             </SwiperSlide>
           ))}
+        {error && (
+          <p className="col-span-2 text-center text-red-500">
+            Sorry something went wrong. Please try agaain
+          </p>
+        )}
         {/* Carousel items */}
         {products?.map(({ id, image, description, title, price, category }) => {
           const product = { id, image, description, title, price, category };
