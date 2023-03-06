@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { RadioGroup } from '@headlessui/react';
 import { IdentificationIcon } from '@heroicons/react/24/outline';
@@ -6,6 +6,7 @@ import { FreeMode, Thumbs } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { SelectedProductType } from '../../utils/interfaces';
+import useProducts from 'hooks/useProducts';
 import useCart from '../../hooks/useCart';
 import { useAuthContext } from '../../context/AuthContext';
 import NotFound from '../NotFound';
@@ -14,23 +15,57 @@ import CartSlideOver from 'components/Product/CartSlideOver';
 import { classNames } from 'hooks/useHeadless';
 import Modal from 'components/ui/Modal';
 import Button from '../../components/ui/Button';
+import { ProductType } from 'utils/interfaces';
+import LoadingSkeleton from 'components/ui/LoadingSkeleton';
+
+interface CartProps {
+  id?: number;
+  image?: string;
+  title?: string;
+  price?: number;
+}
+
+const LoadingProduct = () => {
+  return (
+    <div className="mx-auto max-w-7xl px-4 pt-24 sm:px-6 lg:px-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2">
+        <div className="relative animate-pulse overflow-hidden rounded-2xl bg-slate-50  pt-[100%]">
+          <LoadingSkeleton className="absolute top-0 left-0 h-full w-auto -translate-x-1/2 -translate-y-1/2 " />
+        </div>
+        <div className="mx-auto w-full pl-0 pt-10 pb-16 lg:pl-8 lg:pt-0 lg:pb-24">
+          <LoadingSkeleton className=" animate-pulse rounded-md bg-slate-50  pt-[30%]" />
+          <LoadingSkeleton className="mt-10 animate-pulse rounded-md bg-slate-50  pt-[30%]" />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Product = () => {
-  const { state } = useLocation();
+  const { pathname } = useLocation();
 
-  if (!state.id) {
-    return <NotFound />;
-  }
+  const removeCollectionsPrefix = (str: string) => {
+    return str.replace('/product/', '');
+  };
+
+  const productId = removeCollectionsPrefix(pathname);
 
   const navigate = useNavigate();
 
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
 
-  const { id, image, title, description, price, sizes, details, highlights } =
-    state;
-
   const { ...contextData } = useAuthContext();
   const { user } = contextData;
+
+  const [productData, setProductData] = useState<ProductType>();
+
+  const {
+    productsQuery: { isLoading: itemLoading, error: itemError, data },
+  } = useProducts({}, { key: 'id', value: productId });
+
+  useEffect(() => {
+    data && setProductData(data[0]);
+  }, [data]);
 
   const {
     addOrUpdateItem,
@@ -44,10 +79,10 @@ const Product = () => {
   const [error, setError] = useState(false);
   const [notice, setNotice] = useState(false);
 
-  const checkCartItem = () => {
+  const checkCartItem = ({ id, image, title, price }: CartProps) => {
     setCartAdded(false);
-    const check = cartItems?.findIndex((item) => item.id === id);
-    check === -1 ? handleClick() : setNotice(true);
+    const check = cartItems?.findIndex((item) => item.id === productData?.id);
+    check === -1 ? handleClick({ id, image, title, price }) : setNotice(true);
   };
 
   const handleInputChange = (value: string) => {
@@ -55,34 +90,39 @@ const Product = () => {
     setError(false);
   };
 
-  const handleClick = () => {
+  const handleClick = ({ id, image, title, price }: CartProps) => {
     if (!selectedSize) {
       setError(true);
       return;
     }
-    if (user === null) {
+    if (!user) {
       setOpen(true);
       return;
     }
-    const product: SelectedProductType = {
-      id,
-      image,
-      title,
-      price,
-      size: selectedSize,
-      quantity: 1,
-    };
-
-    addOrUpdateItem.mutate(product, {
-      onSuccess: () => {
-        setCartAdded(true);
-      },
-    });
+    if (id && image && title && price) {
+      const product: SelectedProductType = {
+        id,
+        image,
+        title,
+        price,
+        size: selectedSize,
+        quantity: 1,
+      };
+      addOrUpdateItem.mutate(product, {
+        onSuccess: () => {
+          setCartAdded(true);
+        },
+      });
+    }
   };
 
   const deleteCartItem = (id: number) => {
     removeItem.mutate(id);
   };
+
+  if (itemError) return <NotFound />;
+
+  if (itemLoading) return <LoadingProduct />;
 
   return (
     <>
@@ -126,13 +166,13 @@ const Product = () => {
                 modules={[FreeMode, Thumbs]}
                 className="mySwiper2"
               >
-                {image.map((img: string, i: number) => (
+                {productData?.image?.map((img: string, i: number) => (
                   <SwiperSlide key={i}>
                     <div className="relative overflow-hidden rounded-2xl bg-gray-100 pt-[100%]">
                       <div className="absolute inset-0 translate-x-1/2 translate-y-1/2">
                         <LazyLoadImage
                           src={img}
-                          alt={description}
+                          alt={productData.description}
                           effect="blur"
                           className="absolute top-0 left-0 h-full w-auto -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:opacity-75"
                         />
@@ -150,13 +190,13 @@ const Product = () => {
                 modules={[FreeMode, Thumbs]}
                 className="mySwiper mt-4"
               >
-                {image.map((img: string, i: number) => (
+                {productData?.image.map((img: string, i: number) => (
                   <SwiperSlide key={i}>
                     <div className="relative overflow-hidden rounded-2xl bg-gray-100 pt-[100%]">
                       <div className="absolute inset-0 translate-x-1/2 translate-y-1/2">
                         <LazyLoadImage
                           src={img}
-                          alt={description}
+                          alt={productData.description}
                           effect="blur"
                           className="absolute top-0 left-0 h-full w-auto -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:opacity-75"
                         />
@@ -172,7 +212,7 @@ const Product = () => {
               {/* Title */}
               <div className=" lg:border-gray-200 lg:pr-8">
                 <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                  {title}
+                  {productData?.title}
                 </h1>
               </div>
 
@@ -180,7 +220,7 @@ const Product = () => {
               <div className="mt-4 lg:mt-0">
                 <h2 className="sr-only">Product information</h2>
                 <p className="mt-4 text-3xl tracking-tight text-gray-900">
-                  ${price}
+                  ${productData?.price}
                 </p>
 
                 <div className="mt-10">
@@ -204,7 +244,7 @@ const Product = () => {
                         Choose a size{' '}
                       </RadioGroup.Label>
                       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-                        {sizes.map((size: string) => (
+                        {productData?.sizes?.map((size: string) => (
                           <RadioGroup.Option
                             key={size}
                             value={size}
@@ -270,12 +310,23 @@ const Product = () => {
                   )}
                   {notice && (
                     <p className="mt-4 text-sm text-red-500">
-                      {title} has been added to your cart.
+                      {productData?.title} has been added to your cart.
                     </p>
                   )}
                   <Button
                     text="Add to bag"
-                    onClick={checkCartItem}
+                    onClick={() => {
+                      const id = productData?.id;
+                      const image = productData?.image[0];
+                      const title = productData?.title;
+                      const price = productData?.price;
+                      return checkCartItem({
+                        id,
+                        image,
+                        title,
+                        price,
+                      });
+                    }}
                     className="mt-10 flex max-h-[44px] w-full items-center justify-center rounded-md border border-transparent bg-violet-500 py-2 px-8 text-base font-medium leading-7 text-white hover:bg-violet-600"
                   />
                 </div>
@@ -287,7 +338,9 @@ const Product = () => {
                   <h3 className="sr-only">Description</h3>
 
                   <div className="space-y-6">
-                    <p className="text-base text-gray-900">{description}</p>
+                    <p className="text-base text-gray-900">
+                      {productData?.description}
+                    </p>
                   </div>
                 </div>
 
@@ -301,7 +354,7 @@ const Product = () => {
                       role="list"
                       className="list-disc space-y-2 pl-4 text-sm"
                     >
-                      {highlights.map((highlight: string) => (
+                      {productData?.highlights?.map((highlight: string) => (
                         <li key={highlight} className="text-gray-400">
                           <span className="text-gray-600">{highlight}</span>
                         </li>
@@ -314,7 +367,9 @@ const Product = () => {
                   <h2 className="text-sm font-medium text-gray-900">Details</h2>
 
                   <div className="mt-4 space-y-6">
-                    <p className="text-sm text-gray-600">{details}</p>
+                    <p className="text-sm text-gray-600">
+                      {productData?.details}
+                    </p>
                   </div>
                 </div>
               </div>
