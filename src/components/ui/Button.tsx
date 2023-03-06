@@ -19,8 +19,8 @@ export default function Button({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center justify-center text-white hover:brightness-110 ${
-        className ?? 'rounded-full bg-neutral-800 py-2 px-4'
+      className={`flex items-center justify-center rounded-md text-base transition-all ${
+        className ?? ''
       }`}
       disabled={disabled}
     >
