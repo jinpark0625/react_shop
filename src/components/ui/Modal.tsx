@@ -90,12 +90,12 @@ const Modal = ({
                   <Button
                     text="Sign in"
                     onClick={firstOnClick}
-                    className="inline-flex w-full justify-center rounded-md bg-violet-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-600 sm:ml-3 sm:w-1/2"
+                    className="inline-flex h-[44px] w-full justify-center rounded-md bg-violet-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-600 sm:ml-3 sm:w-1/2"
                   />
                   <Button
                     text="Sign up"
                     onClick={secondOnClick}
-                    className="inline-flex w-full justify-center rounded-md bg-violet-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-600 sm:ml-3 sm:w-1/2"
+                    className="mt-3 inline-flex h-[44px] w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-1/2 "
                   />
                 </div>
               </Dialog.Panel>
