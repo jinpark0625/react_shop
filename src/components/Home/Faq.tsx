@@ -2,10 +2,10 @@ import { faqData } from 'data/Home/homeData';
 
 export default function Faq() {
   return (
-    <section className="mx-auto mt-32 max-w-7xl py-4 px-6 sm:mt-44">
+    <section className="mx-auto my-32 w-full max-w-7xl py-4 px-6 sm:mt-44">
       <div className="grid grid-cols-none grid-rows-1 gap-20 lg:grid-cols-3">
         {/* Title */}
-        <div className="col-span-2 mx-auto text-left lg:col-span-1">
+        <div className="col-span-2 mx-auto w-full text-left lg:col-span-1">
           <p className="text-lg font-semibold leading-8 tracking-tight text-violet-500">
             Your questions, <span className="text-violet-500">answered.</span>
           </p>
