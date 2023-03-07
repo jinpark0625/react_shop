@@ -24,17 +24,17 @@ export default function Main() {
                   are 100 unique collectible Yorkies with proof of ownership
                   stored on the Ethereum Blockchain.
                 </p>
-                <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
+                <div className="mt-10 flex flex-wrap items-center justify-center gap-y-4 gap-x-6 sm:flex-nowrap sm:gap-y-4 lg:justify-start">
                   <Link
                     to="/"
-                    className="flex items-center rounded-md bg-violet-500 px-4 py-2 text-base font-semibold leading-7 text-white shadow-sm transition-all hover:bg-violet-600 hover:shadow-violet-500"
+                    className="flex w-full items-center justify-center rounded-md bg-violet-500 px-4 py-2 text-base font-semibold leading-7 text-white shadow-sm transition-all hover:bg-violet-600 sm:w-fit"
                   >
                     See the Collection
                     <GlobeEuropeAfricaIcon className="ml-2 h-4 w-4" />
                   </Link>
                   <Link
-                    to="/"
-                    className="flex items-center rounded-md border border-violet-500 px-4 py-2 text-base font-semibold leading-7 text-violet-500 shadow-sm transition-all hover:shadow-violet-500"
+                    to="/collections"
+                    className="flex max-h-[44px] w-full items-center justify-center rounded-md border border-violet-500 px-4 py-2 text-base font-semibold leading-7 text-violet-500 shadow-sm transition-all hover:shadow-violet-500 sm:w-fit"
                   >
                     Shop Now
                     <GlobeEuropeAfricaIcon className="ml-2 h-4 w-4" />
