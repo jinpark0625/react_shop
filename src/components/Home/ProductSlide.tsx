@@ -8,25 +8,22 @@ import {
   PRODUCT_LOADING_ARRAY,
 } from '../../data/Home/slideOptions';
 import ProductCard from '../ui/ProductCard';
-import { useNavigate } from 'react-router-dom';
+import ProductTitle from 'components/ui/ProductTitle';
+import ErrorMessage from 'components/ui/ErrorMessage';
 
 export default function ProductSlide() {
   const {
     productSlideQuery: { isLoading, error, data: products },
   } = useProducts();
 
-  const navigate = useNavigate();
-
   return (
-    <section className="mx-auto mt-20 max-w-7xl py-4">
-      <h2 className="mb-6 px-6 text-2xl font-bold tracking-tight text-gray-900 sm:mb-10 sm:text-4xl">
-        New Arrivals
-      </h2>
+    <section className="mx-auto mt-20 w-full max-w-7xl py-4">
+      <ProductTitle title="New Arrivals" className="mb-6 px-6 sm:mb-10" />
       {/* Carousel */}
       <Swiper
         navigation={{
-          nextEl: '.image-swiper-button-next',
-          prevEl: '.image-swiper-button-prev',
+          nextEl: '.image-swiper-button-next-product',
+          prevEl: '.image-swiper-button-prev-product',
           disabledClass: 'opacity-20',
         }}
         slidesPerView={1}
@@ -49,41 +46,36 @@ export default function ProductSlide() {
               <ImagePlaceholder />
             </SwiperSlide>
           ))}
-        {error && (
-          <p className="col-span-2 text-center text-red-500">
-            Sorry something went wrong. Please try agaain
-          </p>
-        )}
+        {error && <ErrorMessage />}
         {/* Carousel items */}
-        {products?.map(({ id, image, description, title, price, category }) => {
-          const product = { id, image, description, title, price, category };
-          return (
-            <SwiperSlide
-              key={id}
-              className="group cursor-pointer rounded-2xl transition-shadow duration-300 ease-in-out hover:shadow-md"
-              onClick={() => {
-                navigate(`/products/${id ?? 404}`, {
-                  state: { product },
-                });
-              }}
-            >
-              <ProductCard
-                image={image}
-                description={description}
-                title={title}
-                price={price}
-                category={category}
-              />
-            </SwiperSlide>
-          );
-        })}
+        {products?.map(
+          ({ id, image, description, title, price, category, sizes, tags }) => {
+            return (
+              <SwiperSlide
+                key={id}
+                className="group cursor-pointer rounded-2xl transition-shadow duration-300 ease-in-out hover:shadow-md"
+              >
+                <ProductCard
+                  id={id}
+                  image={image}
+                  description={description}
+                  title={title}
+                  price={price}
+                  category={category}
+                  sizes={sizes}
+                  tags={tags}
+                />
+              </SwiperSlide>
+            );
+          },
+        )}
         {/* Custom navigation */}
         <div className="mt-8  flex items-center justify-center">
-          <div className="swiper-button image-swiper-button-prev mr-4 h-6 w-6 cursor-pointer">
+          <div className="swiper-button image-swiper-button-prev-product mr-4 h-6 w-6 cursor-pointer">
             <ChevronLeftIcon />
           </div>
           <div className="custom-pagination flex justify-center"></div>
-          <div className="swiper-button image-swiper-button-next ml-4 h-6 w-6 cursor-pointer">
+          <div className="swiper-button image-swiper-button-next-product ml-4 h-6 w-6 cursor-pointer">
             <ChevronRightIcon />
           </div>
         </div>
