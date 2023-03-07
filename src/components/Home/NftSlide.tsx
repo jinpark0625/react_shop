@@ -3,7 +3,10 @@ import { Navigation } from 'swiper';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import ImagePlaceholder from '../ui/ImagePlaceholder';
 import useNft from '../../hooks/useNft';
-import { NFT_BREAK_POINTS, NFT_LOADING_ARRAY } from '../../utils/slideOptions';
+import {
+  NFT_BREAK_POINTS,
+  NFT_LOADING_ARRAY,
+} from '../../data/Home/slideOptions';
 import NftCard from '../ui/NftCard';
 
 export default function NftSlide() {
@@ -12,7 +15,7 @@ export default function NftSlide() {
   } = useNft();
 
   return (
-    <section className="mx-auto mt-12 max-w-7xl py-4 md:mt-20">
+    <section className="mx-auto mt-12 w-full max-w-7xl py-4 md:mt-20">
       {/* Custom Navigation */}
       <div className="flex items-center justify-between px-6">
         <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
