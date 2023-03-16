@@ -9,20 +9,21 @@ import { AuthContextProvider } from 'context/AuthContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ToastContainer } from 'react-toast';
 import Footer from 'components/layout/Footer';
-// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import ScrollToTop from 'components/ScrollToTop';
 const queryClient = new QueryClient();
 
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <ScrollToTop />
       <AuthContextProvider>
         <Navbar />
         <Outlet />
         <Footer />
         <ToastContainer delay={3000} position="top-right" />
       </AuthContextProvider>
-      {/* <ReactQueryDevtools initialIsOpen={true} /> */}
+      <ReactQueryDevtools initialIsOpen={true} />
     </QueryClientProvider>
   );
 }
