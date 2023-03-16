@@ -1,79 +1,31 @@
 import useNft from 'hooks/useNft';
 import ProductTitle from 'components/ui/ProductTitle';
-import { Fragment, useState, useRef, useCallback } from 'react';
-import { Dialog, Disclosure, Transition } from '@headlessui/react';
+import { Fragment, useState, useEffect, useCallback } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
 import {
   XMarkIcon,
-  MinusIcon,
   FunnelIcon,
-  PlusIcon,
+  FaceFrownIcon,
+  AdjustmentsHorizontalIcon,
 } from '@heroicons/react/24/outline';
 import NftCard from 'components/ui/NftCard';
 import ImagePlaceholder from 'components/ui/ImagePlaceholder';
 import { NftType } from 'utils/interfaces';
-
-const filters = [
-  {
-    id: 'background',
-    name: 'Background',
-    options: [
-      { value: 'blue', label: 'Blue', checked: false },
-      { value: 'green', label: 'Green', checked: false },
-      { value: 'heart', label: 'Heart', checked: true },
-      { value: 'neon green', label: 'Neon Green', checked: false },
-      { value: 'orange', label: 'Orange', checked: false },
-      { value: 'pink', label: 'Pink', checked: false },
-      { value: 'purple', label: 'Purple', checked: false },
-      { value: 'sky blue', label: 'Sky Blue', checked: false },
-    ],
-  },
-  {
-    id: 'body',
-    name: 'Body',
-    options: [{ value: 'brown', label: 'Brown', checked: false }],
-  },
-  {
-    id: 'eyes',
-    name: 'Eyes',
-    options: [
-      { value: 'Afraid Eyes', label: 'Afraid Eyes', checked: false },
-      { value: 'Angry Eyes', label: 'Angry Eyes', checked: false },
-      { value: 'Excited Eyes', label: 'Excited Eyes', checked: false },
-      { value: 'Heart Eyes', label: 'Heart Eyes', checked: false },
-      { value: 'Hopeful Eyes', label: 'Hopeful Eyes', checked: false },
-      { value: 'Sad Eyes', label: 'Sad Eyes', checked: true },
-      { value: 'Sunglasses', label: 'Sunglasses', checked: true },
-      { value: 'Surprised Eyes', label: 'Surprised Eyes', checked: true },
-    ],
-  },
-  {
-    id: 'hat',
-    name: 'Hat',
-    options: [
-      { value: 'Beanie', label: 'Beanie', checked: false },
-      { value: 'Hairpin', label: 'Hairpin', checked: false },
-      { value: 'Newsboy', label: 'Newsboy', checked: false },
-      { value: 'Sunglasses', label: 'Sunglasses', checked: false },
-      { value: 'Watermelon', label: 'Watermelon', checked: false },
-    ],
-  },
-  {
-    id: 'nose',
-    name: 'Nose',
-    options: [
-      { value: 'Bored', label: 'Bored', checked: false },
-      { value: 'Dog Chew', label: 'Dog Chew', checked: false },
-      { value: 'Excited', label: 'Excited', checked: false },
-      { value: 'Happy', label: 'Happy', checked: false },
-      { value: 'Loved', label: 'Loved', checked: false },
-      { value: 'Sad', label: 'Sad', checked: true },
-    ],
-  },
-];
-
-const LOADING_ARRAY = [1, 2, 3, 4, 5, 6, 7, 8];
+import useIntersect from 'hooks/useIntersect';
+import useSortParams from 'hooks/useSortParams';
+import ErrorMessage from 'components/ui/ErrorMessage';
+import { NftFilter, NftFilterHeader } from 'components/Nft/NftFilter';
+import { FILTERITEM, LOADING_ARRAY } from 'data/Products/Menus';
 
 const Nfts = () => {
+  const {
+    query,
+    searchParams,
+    appendSortParams,
+    deleteSelectedSortParms,
+    deleteAllParams,
+  } = useSortParams();
+
   const {
     nftsQuery: {
       isFetching,
@@ -83,32 +35,63 @@ const Nfts = () => {
       hasNextPage,
       fetchNextPage,
     },
-  } = useNft();
+    nftsAllData: {
+      isLoading: filterLoading,
+      error: filterError,
+      data: filterData,
+    },
+  } = useNft(query);
+
+  const [filters, setFilters] = useState<Array<{ [key: string]: string[] }>>(
+    [],
+  );
+
+  useEffect(() => {
+    filterData && deduplicateByOptions(filterData);
+  }, [filterData]);
+
+  const deduplicateByOptions = useCallback((nfts: NftType[]) => {
+    if (nfts) {
+      const filters: Array<{ [key: string]: string[] }> = [];
+
+      FILTERITEM.map((value) => {
+        const deduplicatedArray = Array.from(
+          new Set(
+            nfts?.flatMap((nft) => nft[value.toLowerCase() as keyof NftType]),
+          ),
+        ) as string[];
+        const filterObject = {
+          [value]: deduplicatedArray,
+        };
+        return filters.push(filterObject);
+      });
+
+      setFilters(filters);
+    }
+  }, []);
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
-  const observer = useRef<IntersectionObserver | null>(null);
-
-  const lastElementRef = useCallback(
-    (node: HTMLLIElement) => {
-      if (isLoading) return;
-      // 관찰종료
-      if (observer.current) observer.current.disconnect();
-      observer.current = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting && hasNextPage) {
-            fetchNextPage().catch(console.log);
-          }
-        },
-        {
-          threshold: 1,
-        },
-      );
-      // 관찰시작
-      if (node) observer.current.observe(node);
+  const lastElementRef = useIntersect(
+    (entries) => {
+      if (entries[0].isIntersecting && hasNextPage) {
+        fetchNextPage().catch(console.log);
+      }
     },
-    [hasNextPage, fetchNextPage],
+    hasNextPage,
+    fetchNextPage,
   );
+
+  const handleCheckboxChange = (key: string, value: string) => {
+    const values = searchParams.getAll(key);
+    const isValueSelected = values.some(
+      (v) => v.replace(/ /g, '') === value.replace(/ /g, ''),
+    );
+
+    if (isValueSelected) {
+      deleteSelectedSortParms(key, value);
+    } else appendSortParams(key, value);
+  };
 
   return (
     <div className="bg-white">
@@ -144,7 +127,8 @@ const Nfts = () => {
               >
                 <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
                   <div className="flex items-center justify-between px-4">
-                    <h2 className="text-lg font-medium text-gray-900">
+                    <h2 className="flex items-center text-lg font-medium text-gray-900">
+                      <AdjustmentsHorizontalIcon className="mr-2 h-4 w-4" />
                       Filters
                     </h2>
                     <button
@@ -158,65 +142,14 @@ const Nfts = () => {
                   </div>
 
                   {/* Filters */}
-                  <form className="mt-4 border-t border-gray-200">
-                    {filters.map((section) => (
-                      <Disclosure
-                        as="div"
-                        key={section.id}
-                        className="border-t border-gray-200 px-4 py-6"
-                      >
-                        {({ open }) => (
-                          <>
-                            <h3 className="-mx-2 -my-3 flow-root">
-                              <Disclosure.Button className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
-                                <span className="font-medium text-gray-900">
-                                  {section.name}
-                                </span>
-                                <span className="ml-6 flex items-center">
-                                  {open ? (
-                                    <MinusIcon
-                                      className="h-5 w-5"
-                                      aria-hidden="true"
-                                    />
-                                  ) : (
-                                    <PlusIcon
-                                      className="h-5 w-5"
-                                      aria-hidden="true"
-                                    />
-                                  )}
-                                </span>
-                              </Disclosure.Button>
-                            </h3>
-                            <Disclosure.Panel className="pt-6">
-                              <div className="space-y-6">
-                                {section.options.map((option, optionIdx) => (
-                                  <div
-                                    key={option.value}
-                                    className="flex items-center"
-                                  >
-                                    <input
-                                      id={`filter-mobile-${section.id}-${optionIdx}`}
-                                      name={`${section.id}[]`}
-                                      defaultValue={option.value}
-                                      type="checkbox"
-                                      defaultChecked={option.checked}
-                                      className="h-4 w-4 rounded border-gray-300 text-violet-600 focus:ring-violet-500"
-                                    />
-                                    <label
-                                      htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
-                                      className="ml-3 min-w-0 flex-1 text-gray-500"
-                                    >
-                                      {option.label}
-                                    </label>
-                                  </div>
-                                ))}
-                              </div>
-                            </Disclosure.Panel>
-                          </>
-                        )}
-                      </Disclosure>
-                    ))}
-                  </form>
+                  <NftFilter
+                    filterLoading={filterLoading}
+                    filterError={filterError}
+                    filters={filters}
+                    searchParams={searchParams}
+                    handleCheckboxChange={handleCheckboxChange}
+                    mobile={true}
+                  />
                 </Dialog.Panel>
               </Transition.Child>
             </div>
@@ -246,66 +179,21 @@ const Nfts = () => {
             </h2>
 
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-              {/* Filters */}
-              <form className="hidden lg:block">
-                {filters.map((section) => (
-                  <Disclosure
-                    as="div"
-                    key={section.id}
-                    className="border-b border-gray-200 py-6"
-                  >
-                    {({ open }) => (
-                      <>
-                        <h3 className="-my-3 flow-root">
-                          <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
-                            <span className="font-medium text-gray-900">
-                              {section.name}
-                            </span>
-                            <span className="ml-6 flex items-center">
-                              {open ? (
-                                <MinusIcon
-                                  className="h-5 w-5"
-                                  aria-hidden="true"
-                                />
-                              ) : (
-                                <PlusIcon
-                                  className="h-5 w-5"
-                                  aria-hidden="true"
-                                />
-                              )}
-                            </span>
-                          </Disclosure.Button>
-                        </h3>
-                        <Disclosure.Panel className="pt-6">
-                          <div className="space-y-4">
-                            {section.options.map((option, optionIdx) => (
-                              <div
-                                key={option.value}
-                                className="flex items-center"
-                              >
-                                <input
-                                  id={`filter-${section.id}-${optionIdx}`}
-                                  name={`${section.id}[]`}
-                                  defaultValue={option.value}
-                                  type="checkbox"
-                                  defaultChecked={option.checked}
-                                  className="h-4 w-4 rounded border-gray-300 text-violet-600 focus:ring-violet-500"
-                                />
-                                <label
-                                  htmlFor={`filter-${section.id}-${optionIdx}`}
-                                  className="ml-3 text-sm text-gray-600"
-                                >
-                                  {option.label}
-                                </label>
-                              </div>
-                            ))}
-                          </div>
-                        </Disclosure.Panel>
-                      </>
-                    )}
-                  </Disclosure>
-                ))}
-              </form>
+              <div>
+                {/* Filters */}
+                <NftFilterHeader
+                  query={query}
+                  deleteAllParams={deleteAllParams}
+                />
+                <NftFilter
+                  filterLoading={filterLoading}
+                  filterError={filterError}
+                  filters={filters}
+                  searchParams={searchParams}
+                  handleCheckboxChange={handleCheckboxChange}
+                  mobile={false}
+                />
+              </div>
 
               {/* Product grid */}
               <div className="lg:col-span-3">
@@ -319,59 +207,58 @@ const Nfts = () => {
                     ))}
                   </ul>
                 )}
-
                 <ul className="grid grid-cols-1 gap-6  sm:grid-cols-2 md:grid-cols-4">
                   <>
-                    {error && (
-                      <p className="col-span-2 text-center text-red-500">
-                        Sorry something went wrong. Please try again
-                      </p>
-                    )}
-                    {data?.pages.map(({ results }, i) => {
-                      return (
+                    {error && <ErrorMessage />}
+                    {data?.pages.map(({ data }, i) => {
+                      return data && data.length !== 0 ? (
                         <Fragment key={i}>
-                          {results.map(
-                            (
-                              { id, title, image }: NftType,
-                              i: number,
-                              arr: NftType[],
-                            ) => {
-                              if (arr.length === i + 1) {
-                                return (
-                                  <li
-                                    key={id}
-                                    className="group cursor-pointer rounded-2xl"
-                                    ref={lastElementRef}
-                                  >
-                                    <NftCard image={image} title={title} />
-                                  </li>
-                                );
-                              } else {
-                                return (
-                                  <li
-                                    key={id}
-                                    className="group cursor-pointer rounded-2xl"
-                                  >
-                                    <NftCard image={image} title={title} />
-                                  </li>
-                                );
-                              }
-                            },
-                          )}
+                          {data.map(({ id, image, title }, i: number, arr) => (
+                            <Fragment key={i}>
+                              {arr.length === i + 1 ? (
+                                <li
+                                  key={id}
+                                  className="group cursor-pointer rounded-2xl"
+                                  ref={lastElementRef}
+                                >
+                                  <NftCard image={image} title={title} />
+                                </li>
+                              ) : (
+                                <li
+                                  key={id}
+                                  className="group cursor-pointer rounded-2xl"
+                                >
+                                  <NftCard image={image} title={title} />
+                                </li>
+                              )}
+                            </Fragment>
+                          ))}
                         </Fragment>
+                      ) : (
+                        <li
+                          className="col-span-4 mt-10 text-center text-gray-600"
+                          key={i}
+                        >
+                          <FaceFrownIcon className="m-auto h-8 w-8 text-violet-500" />
+                          <h3 className="m-2 text-2xl font-semibold text-gray-900">
+                            No mathces
+                          </h3>
+                          Unfortunately we couldn’t find a match for your
+                          search.
+                        </li>
                       );
                     })}
-                    {isFetching && (
-                      <ul className="grid grid-cols-1 gap-6  sm:grid-cols-2 md:grid-cols-4">
-                        {LOADING_ARRAY.map((data, index) => (
-                          <li key={index}>
-                            <ImagePlaceholder height="min-h-[184px]" />
-                          </li>
-                        ))}
-                      </ul>
-                    )}
                   </>
                 </ul>
+                {isFetching && (
+                  <ul className="mt-6 grid grid-cols-1 gap-6  sm:grid-cols-2 md:grid-cols-4">
+                    {LOADING_ARRAY.map((data, index) => (
+                      <li key={index}>
+                        <ImagePlaceholder height="min-h-[184px]" />
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
           </section>
