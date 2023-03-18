@@ -124,7 +124,7 @@ export const NftFilterHeader = ({
       </h3>
       {Object.keys(query).length !== 0 && (
         <button
-          className="flex items-center rounded-full bg-gray-900 py-1 px-2 text-xs text-white"
+          className="flex items-center rounded-full bg-gray-800 py-1 px-2 text-xs text-white"
           onClick={deleteAllParams}
         >
           Clear all <XMarkIcon className="ml-1 h-3 w-3" />
