@@ -221,14 +221,22 @@ const Nfts = () => {
                                   className="group cursor-pointer rounded-2xl"
                                   ref={lastElementRef}
                                 >
-                                  <NftCard image={image} title={title} />
+                                  <NftCard
+                                    image={image}
+                                    title={title}
+                                    id={id}
+                                  />
                                 </li>
                               ) : (
                                 <li
                                   key={id}
                                   className="group cursor-pointer rounded-2xl"
                                 >
-                                  <NftCard image={image} title={title} />
+                                  <NftCard
+                                    image={image}
+                                    title={title}
+                                    id={id}
+                                  />
                                 </li>
                               )}
                             </Fragment>
