@@ -2,19 +2,20 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import ImagePlaceholder from '../ui/ImagePlaceholder';
-import useNft from '../../hooks/useNft';
 import {
   NFT_BREAK_POINTS,
   NFT_LOADING_ARRAY,
 } from '../../data/Home/slideOptions';
 import NftCard from '../ui/NftCard';
 import ProductTitle from 'components/ui/ProductTitle';
+import { NftType } from 'utils/interfaces';
 
-export default function NftSlide() {
-  const {
-    nftsQuery: { isLoading, data: products },
-  } = useNft();
+interface NftSlidePropsTypes {
+  isLoading?: boolean;
+  products?: NftType[];
+}
 
+export default function NftSlide({ isLoading, products }: NftSlidePropsTypes) {
   return (
     <section className="mx-auto mt-12 w-full max-w-7xl py-4 md:mt-20">
       {/* Custom Navigation */}
@@ -47,25 +48,19 @@ export default function NftSlide() {
           NFT_LOADING_ARRAY.map((data) => (
             <SwiperSlide
               key={data}
-              className="group cursor-pointer rounded-2xl transition-shadow duration-300 ease-in-out hover:shadow-md"
+              className="group cursor-pointer rounded-2xl transition-shadow duration-300 ease-in-out"
             >
               <ImagePlaceholder />
             </SwiperSlide>
           ))}
         {/* carousel items */}
-        {products?.map(({ Title, image }, index) => {
-          //   const product = { Title,image };
+        {products?.map(({ title, image, id }) => {
           return (
             <SwiperSlide
-              key={index}
-              className="group cursor-pointer rounded-2xl transition-shadow duration-300 ease-in-out hover:shadow-md"
-              //   onClick={() => {
-              //     navigate(`/products/${id ?? 404}`, {
-              //       state: { product },
-              //     });
-              //   }}
+              key={id}
+              className="group cursor-pointer rounded-2xl transition-shadow duration-300 ease-in-out"
             >
-              <NftCard image={image} title={Title} />
+              <NftCard image={image} title={title} id={id} />
             </SwiperSlide>
           );
         })}
