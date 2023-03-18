@@ -26,7 +26,7 @@ export default function Main() {
                 </p>
                 <div className="mt-10 flex flex-wrap items-center justify-center gap-y-4 gap-x-6 sm:flex-nowrap sm:gap-y-4 lg:justify-start">
                   <Link
-                    to="/"
+                    to="/nfts"
                     className="flex w-full items-center justify-center rounded-md bg-violet-500 px-4 py-2 text-base font-semibold leading-7 text-white shadow-sm transition-all hover:bg-violet-600 sm:w-fit"
                   >
                     See the Collection
@@ -43,19 +43,30 @@ export default function Main() {
               </div>
             </div>
             <div className="relative flex h-96 justify-center	">
-              {mainData.map((data) => (
-                <MainImage
-                  key={data.name}
-                  name={data.name}
-                  price={data.price}
-                  time={data.time}
-                  image={data.image}
-                  rotation={data.rotation}
-                  scale={data.scale}
-                  direction={data.direction}
-                  zIndex={data.zIndex}
-                />
-              ))}
+              {mainData.map(
+                ({
+                  name,
+                  price,
+                  time,
+                  image,
+                  rotation,
+                  scale,
+                  direction,
+                  zIndex,
+                }) => (
+                  <MainImage
+                    key={name}
+                    name={name}
+                    price={price}
+                    time={time}
+                    image={image}
+                    rotation={rotation}
+                    scale={scale}
+                    direction={direction}
+                    zIndex={zIndex}
+                  />
+                ),
+              )}
             </div>
           </div>
         </div>
