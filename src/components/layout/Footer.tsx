@@ -12,7 +12,7 @@ export default function Footer() {
 
   return (
     <footer
-      className={`mt-32 border-t border-gray-200 ${
+      className={`mt-auto border-t border-gray-200 ${
         navigation.pathname === '/login' || navigation.pathname === '/register'
           ? 'hidden'
           : 'block'
