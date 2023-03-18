@@ -4,8 +4,10 @@ module.exports = {
   theme: {
     extend: {
       // custom colors
-      colors: {
-        brand: '#396d37',
+      colors: {},
+      boxShadow: {
+        custom:
+          '0 0px 15px -3px rgb(0 0 0 / 11%), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
       },
       backgroundImage: {},
     },
