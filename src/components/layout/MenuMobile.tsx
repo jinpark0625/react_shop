@@ -83,7 +83,7 @@ export default function MenuMobile({
                         }
                         onClick={() => {
                           setOpen(false);
-                          navigate('/products');
+                          navigate('/category/shop-all');
                         }}
                       >
                         {category.name}
@@ -133,12 +133,16 @@ export default function MenuMobile({
                       </div>
                       {category.sections.map((section) => (
                         <div key={section.name}>
-                          <p
+                          <Link
                             id={`${category.id}-${section.id}-heading-mobile`}
-                            className="font-medium text-gray-900"
+                            className="cursor-pointer font-medium text-gray-900 "
+                            to={section.href}
+                            onClick={() => {
+                              setOpen(false);
+                            }}
                           >
                             {section.name}
-                          </p>
+                          </Link>
                           <ul
                             role="list"
                             aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
