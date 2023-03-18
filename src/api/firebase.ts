@@ -13,15 +13,16 @@ import {
   Auth,
 } from 'firebase/auth';
 import { Dispatch, SetStateAction } from 'react';
+import { getDatabase, ref, set, get, remove } from 'firebase/database';
 import {
-  getDatabase,
-  ref,
-  set,
-  get,
-  remove,
-  query,
-  limitToLast,
-} from 'firebase/database';
+  collection,
+  getFirestore,
+  getDocs,
+  query as storeQuery,
+  where,
+  QueryConstraint,
+  orderBy,
+} from 'firebase/firestore';
 import { v4 as uuid } from 'uuid';
 import { ProductType, SelectedProductType } from '../utils/interfaces';
 import {
@@ -52,6 +53,14 @@ interface SignUpType {
   name: string;
   image?: ImageType;
 }
+interface ProductQueryType {
+  key?: string;
+  value?: string;
+  color?: string;
+  sizes?: string;
+  sort?: string;
+  item?: string;
+}
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -59,6 +68,7 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 const database = getDatabase(app);
 const storage = getStorage(app);
+const storeDB = getFirestore(app);
 
 function getErrorMessage(error: unknown) {
   if (error instanceof Error) return error.message;
@@ -132,24 +142,44 @@ export async function addNewProduct(product: ProductType, image: URL) {
   });
 }
 
-export async function getProducts(key: string) {
-  return await get(ref(database, key)) //
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        return Object.values(snapshot.val());
-      }
-      return [];
-    });
-}
+export async function getProducts({
+  key,
+  value,
+  color,
+  sizes,
+  sort,
+  item,
+}: ProductQueryType) {
+  const filters: QueryConstraint[] = [];
 
-export async function getNFTs(key: string) {
-  return await get(query(ref(database, key), limitToLast(10))) //
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        return Object.values(snapshot.val());
-      }
-      return [];
+  color && filters.push(where('color', '==', color));
+  sizes && filters.push(where('sizes', 'array-contains', sizes));
+  item && filters.push(where('tags', '==', item));
+
+  if (!key && !sort) {
+    filters.push(orderBy('category'));
+  } else if (key === 'category' && !sort) {
+    filters.push(where(key, '==', value));
+  } else {
+    key && filters.push(where(key, '==', value));
+    !sort && filters.push(orderBy('category'));
+  }
+  if (sort === 'priceAsc') {
+    filters.push(orderBy('price'));
+  } else if (sort === 'priceDesc') {
+    filters.push(orderBy('price', 'desc'));
+  } else {
+    sort && filters.push(orderBy(sort, 'desc'));
+  }
+
+  const query = storeQuery(collection(storeDB, 'products'), ...filters);
+  return await getDocs(query).then((snapshot) => {
+    const results: ProductType[] = [];
+    snapshot.forEach((doc) => {
+      results.push(doc.data() as ProductType);
     });
+    return results;
+  });
 }
 
 export async function getCart(userId: string) {
