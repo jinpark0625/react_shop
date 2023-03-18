@@ -1,16 +1,13 @@
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import ImagePlaceholder from './ImagePlaceholder';
 
 interface IProps {
   image: string;
-  register?: boolean;
   firstText: string;
   secondText: string;
 }
 
 export default function AuthImageContainer({
   image,
-  register,
   firstText,
   secondText,
 }: IProps) {
@@ -24,8 +21,8 @@ export default function AuthImageContainer({
         <LazyLoadImage
           src={image}
           width={600}
-          height={400}
-          placeholder={<ImagePlaceholder />}
+          height={500}
+          effect="blur"
           alt="Image Alt"
           className="-mt-16"
         />
