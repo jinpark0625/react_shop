@@ -120,8 +120,8 @@ const MenuDesktop = forwardRef<HTMLButtonElement, menuProps>(
                                             className="object-cover object-center"
                                           />
                                         </div>
-                                        <a
-                                          href={item.href}
+                                        <Popover.Button
+                                          onClick={() => navigate(item.href)}
                                           className="mt-6 block font-medium text-gray-900"
                                         >
                                           <span
@@ -129,7 +129,7 @@ const MenuDesktop = forwardRef<HTMLButtonElement, menuProps>(
                                             aria-hidden="true"
                                           />
                                           {item.name}
-                                        </a>
+                                        </Popover.Button>
                                         <p aria-hidden="true" className="mt-1">
                                           Shop now
                                         </p>
@@ -139,12 +139,13 @@ const MenuDesktop = forwardRef<HTMLButtonElement, menuProps>(
                                   <div className="row-start-1 grid grid-cols-3 gap-y-10 gap-x-8 text-sm">
                                     {category.sections.map((section) => (
                                       <div key={section.name}>
-                                        <p
+                                        <Popover.Button
                                           id={`${section.name}-heading`}
-                                          className="font-medium text-gray-900"
+                                          className="cursor-pointer font-medium text-gray-900"
+                                          onClick={() => navigate(section.href)}
                                         >
                                           {section.name}
-                                        </p>
+                                        </Popover.Button>
                                         <ul
                                           role="list"
                                           aria-labelledby={`${section.name}-heading`}
@@ -155,12 +156,14 @@ const MenuDesktop = forwardRef<HTMLButtonElement, menuProps>(
                                               key={item.name}
                                               className="flex"
                                             >
-                                              <a
-                                                href={item.href}
+                                              <Popover.Button
+                                                onClick={() =>
+                                                  navigate(item.href)
+                                                }
                                                 className="hover:text-gray-800"
                                               >
                                                 {item.name}
-                                              </a>
+                                              </Popover.Button>
                                             </li>
                                           ))}
                                         </ul>
@@ -177,13 +180,13 @@ const MenuDesktop = forwardRef<HTMLButtonElement, menuProps>(
                   </Popover>
                 ))}
                 {headerData.pages.map((page) => (
-                  <a
+                  <Link
                     key={page.name}
-                    href={page.href}
+                    to={page.href}
                     className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
                   >
                     {page.name}
-                  </a>
+                  </Link>
                 ))}
                 {isAdmin && (
                   <Link
