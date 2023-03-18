@@ -1,7 +1,7 @@
 import React from 'react';
 interface ButtonPros {
   text: string;
-  onClick?: () => void;
+  onClick?: (e?: any) => void;
   disabled?: boolean;
   className?: string;
   icon?: IconType;
@@ -19,10 +19,11 @@ export default function Button({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center justify-center rounded-md text-base transition-all ${
+      className={`flex max-h-[44px] items-center justify-center rounded-md transition-all ${
         className ?? ''
       }`}
       disabled={disabled}
+      aria-label={text}
     >
       {icon && React.createElement(icon)}
       {text}
