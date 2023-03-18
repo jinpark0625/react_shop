@@ -108,7 +108,10 @@ const CartSlideOver = ({
                                   <div>
                                     <div className="flex justify-between text-base font-medium text-gray-900">
                                       <h3>
-                                        <Link to={`/product/${product?.id}`}>
+                                        <Link
+                                          to={`/product/${product?.id}`}
+                                          onClick={() => setOpen(false)}
+                                        >
                                           {product.title}
                                         </Link>
                                       </h3>
