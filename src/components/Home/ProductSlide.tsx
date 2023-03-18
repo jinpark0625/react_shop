@@ -1,7 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import useProducts from '../../hooks/useProducts';
 import ImagePlaceholder from '../ui/ImagePlaceholder';
 import {
   PRODUCT_BREAK_POINTS,
@@ -10,12 +9,19 @@ import {
 import ProductCard from '../ui/ProductCard';
 import ProductTitle from 'components/ui/ProductTitle';
 import ErrorMessage from 'components/ui/ErrorMessage';
+import { ProductType } from 'utils/interfaces';
 
-export default function ProductSlide() {
-  const {
-    productSlideQuery: { isLoading, error, data: products },
-  } = useProducts();
+interface ProductSlidePropsTypes {
+  isLoading?: boolean;
+  error?: Error | null;
+  products?: ProductType[];
+}
 
+export default function ProductSlide({
+  isLoading,
+  error,
+  products,
+}: ProductSlidePropsTypes) {
   return (
     <section className="mx-auto mt-20 w-full max-w-7xl py-4">
       <ProductTitle title="New Arrivals" className="mb-6 px-6 sm:mb-10" />
