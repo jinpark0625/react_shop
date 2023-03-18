@@ -29,7 +29,11 @@ export async function fetchNFTAll() {
 export async function fetchNFT({ query, pageParam }: NFTQueryType) {
   const { from, to } = getPagination(pageParam, 10);
 
-  let supabaseQuery = supabase.from('nft').select('*').range(from, to);
+  let supabaseQuery = supabase
+    .from('nft')
+    .select('*')
+    .range(from, to)
+    .order('id');
 
   if (query) {
     for (const [key, value] of Object.entries(query)) {
@@ -52,4 +56,20 @@ export async function fetchNFT({ query, pageParam }: NFTQueryType) {
       page: pageParam,
     },
   };
+}
+
+export async function fetchSelectedNFT(id: string) {
+  const { data } = await supabase.from('nft').select('*').eq('id', id);
+
+  return data;
+}
+
+export async function fetchNFTSlide() {
+  const { data } = await supabase
+    .from('nft')
+    .select('*')
+    .range(0, 9)
+    .order('id');
+
+  return data;
 }
