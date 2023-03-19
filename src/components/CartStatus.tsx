@@ -6,7 +6,7 @@ export default function CartStatus() {
   } = useCart();
 
   return (
-    <div className="relative mr-6">
+    <div className="relative">
       {products ? (
         <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
           {products.length}
