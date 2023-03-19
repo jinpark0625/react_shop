@@ -7,14 +7,15 @@ export const headerData = {
       featured: [
         {
           name: 'New Arrivals',
-          href: '#',
+          href: '/collections',
           imageSrc:
             'https://res.cloudinary.com/dchh1a7k8/image/upload/v1676699141/items/whiteTote_lwcm2h.webp',
           imageAlt: 'Tote bag',
         },
         {
           name: 'Basic Tees',
-          href: '#',
+          href: '/collections/Tops',
+
           imageSrc:
             'https://res.cloudinary.com/dchh1a7k8/image/upload/v1676699141/items/blackT_front_ro4ws2.webp',
           imageAlt: 'black tees',
@@ -24,19 +25,23 @@ export const headerData = {
         {
           id: 'clothing',
           name: 'Clothing',
-          items: [{ name: 'Tops', href: '#' }],
+          href: '/collections/Clothing',
+
+          items: [{ name: 'Tops', href: '/collections/Tops' }],
         },
         {
           id: 'accessories',
           name: 'Accessories',
-          items: [{ name: 'Bags', href: '#' }],
+          href: '/collections/Accessories',
+
+          items: [{ name: 'Bags', href: '/collections/Bags' }],
         },
       ],
     },
   ],
   pages: [
-    { name: 'NFTs', href: '/' },
-    { name: 'Shop All', href: '/' },
+    { name: 'NFTs', href: '/nfts' },
+    { name: 'Shop All', href: '/collections' },
   ],
 };
 
