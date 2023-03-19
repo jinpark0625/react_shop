@@ -12,12 +12,11 @@ import { useAuthContext } from '../../context/AuthContext';
 import NotFound from '../NotFound';
 import type { Swiper as SwiperClass } from 'swiper';
 import CartSlideOver from 'components/Product/CartSlideOver';
-import { classNames } from 'hooks/useHeadless';
+import { classNames, removeCollectionsPrefix } from 'utils/collectionUtils';
 import Modal from 'components/ui/Modal';
 import Button from '../../components/ui/Button';
 import { ProductType } from 'utils/interfaces';
 import LoadingSkeleton from 'components/ui/LoadingSkeleton';
-
 interface CartProps {
   id?: number;
   image?: string;
@@ -44,11 +43,7 @@ const LoadingProduct = () => {
 const Product = () => {
   const { pathname } = useLocation();
 
-  const removeCollectionsPrefix = (str: string) => {
-    return str.replace('/product/', '');
-  };
-
-  const productId = removeCollectionsPrefix(pathname);
+  const productId = removeCollectionsPrefix('/product/', pathname);
 
   const navigate = useNavigate();
 
@@ -81,6 +76,14 @@ const Product = () => {
 
   const checkCartItem = ({ id, image, title, price }: CartProps) => {
     setCartAdded(false);
+    if (!selectedSize) {
+      setError(true);
+      return;
+    }
+    if (!user) {
+      setOpen(true);
+      return;
+    }
     const check = cartItems?.findIndex((item) => item.id === productData?.id);
     check === -1 ? handleClick({ id, image, title, price }) : setNotice(true);
   };
@@ -91,14 +94,6 @@ const Product = () => {
   };
 
   const handleClick = ({ id, image, title, price }: CartProps) => {
-    if (!selectedSize) {
-      setError(true);
-      return;
-    }
-    if (!user) {
-      setOpen(true);
-      return;
-    }
     if (id && image && title && price) {
       const product: SelectedProductType = {
         id,
@@ -155,7 +150,7 @@ const Product = () => {
 
       {/* Content */}
       <div className="bg-white">
-        <div className="mx-auto max-w-7xl px-4 pt-24 sm:px-6 lg:px-8">
+        <div className="mx-auto mb-32 max-w-7xl px-4 pt-24 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 ">
             {/* image */}
             <div>
