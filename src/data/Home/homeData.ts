@@ -6,7 +6,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 // Main
-export const mainData = [
+export const MAINDATA = [
   {
     name: 'Happy Jolly #61',
     price: 0.01,
@@ -34,7 +34,7 @@ export const mainData = [
     direction: 'right-0',
   },
 ];
-export const faqData = [
+export const FAQ_DATA = [
   {
     name: 'What is NFT?',
     description: `An NFT, or Non-Fungible Token, is a digital asset that represents ownership or proof of authenticity of something unique, such as a piece of art or a video clip. It's like a certificate of ownership for a specific item, except that it's stored on a secure digital ledger called a blockchain, which makes it hard to fake or duplicate.`,
