@@ -6,9 +6,7 @@ import { FcGoogle } from 'react-icons/fc';
 import Loading from '../../components/ui/Loading';
 import useUser from '../../hooks/useUser';
 import AuthImageContainer from 'components/ui/AuthImageContainer';
-
-const EMAIL_REGEX =
-  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+import { EMAIL_REGEX } from 'data/Auth/authData';
 
 interface IProps {
   email: string;
@@ -76,7 +74,7 @@ export default function Login() {
   };
 
   return (
-    <section className="m-auto grid min-h-[calc(100vh-64px)] grid-cols-10">
+    <section className="m-auto grid min-h-[calc(100vh-64px)] w-full grid-cols-10">
       {loginQuery.isLoading && <Loading />}
       <div className="col-span-10 flex h-full w-full grow flex-col items-center justify-center bg-white shadow-slate-50 drop-shadow-md lg:col-span-4">
         <div className="mb-14 flex-col items-center text-center">
@@ -127,18 +125,18 @@ export default function Login() {
             <Button
               text="Login"
               disabled={isSubmitting}
-              className="rounded-lg bg-violet-500 py-4 hover:bg-violet-600 hover:shadow-md hover:shadow-violet-500 "
+              className="rounded-lg bg-violet-500 py-4 font-semibold text-white hover:bg-violet-600"
             />
           </form>
           <Button
             text="Sign with Google"
             onClick={googleLogin}
             icon={() => <FcGoogle className="mr-2 text-2xl" />}
-            className="mt-6 w-full max-w-sm rounded-lg border border-gray-300 bg-white py-4 text-slate-500  hover:shadow-md"
+            className="mt-6 w-full max-w-sm rounded-lg border border-gray-300 bg-white py-4 font-semibold text-slate-500  hover:bg-gray-50"
           />
           <div className="mt-10 text-slate-500">
             Don&#39;t have an account yet?
-            <Link to="/register" className="p-2 text-violet-500">
+            <Link to="/register" className="p-2 font-semibold text-violet-500">
               Sign Up
             </Link>
           </div>
