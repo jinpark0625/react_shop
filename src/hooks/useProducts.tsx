@@ -12,14 +12,54 @@ interface NewProductType {
   url: URL;
 }
 
-export default function useProducts() {
+interface QueryProps {
+  color?: string;
+  sizes?: string;
+  sort?: string;
+  item?: string;
+}
+
+interface FilterProps {
+  key?: string;
+  value?: string;
+}
+
+export default function useProducts(
+  query: Partial<QueryProps> = {},
+  filter: Partial<FilterProps> = {},
+) {
   const queryClient = useQueryClient();
 
+  const { color, sizes, sort, item } = query;
+  const { key, value } = filter;
+
   const productsQuery: UseQueryResult<ProductType[], Error> = useQuery(
-    ['products'],
-    async () => await fetchProdcuts('products'),
+    ['products', query, filter],
+    async () =>
+      await fetchProdcuts({
+        key,
+        value,
+        color,
+        sizes,
+        sort,
+        item,
+      }),
     {
       staleTime: 1000 * 60,
+      keepPreviousData: true,
+    },
+  );
+
+  const productFilterQuery: UseQueryResult<ProductType[], Error> = useQuery(
+    ['products', filter],
+    async () =>
+      await fetchProdcuts({
+        key,
+        value,
+      }),
+    {
+      staleTime: 1000 * 60,
+      keepPreviousData: true,
     },
   );
 
@@ -31,5 +71,9 @@ export default function useProducts() {
     },
   );
 
-  return { productsQuery, addProduct };
+  return {
+    productsQuery,
+    addProduct,
+    productFilterQuery,
+  };
 }
