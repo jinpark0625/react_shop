@@ -25,7 +25,8 @@ const useIntersect = (
 
       if (node) observer.current.observe(node);
     },
-    [callback, hasNextPage, fetchNextPage],
+
+    [hasNextPage, fetchNextPage],
   );
 
   return ref;
