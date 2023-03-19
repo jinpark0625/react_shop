@@ -1,13 +1,30 @@
 interface PriceProps {
   text: string;
-  price?: number;
+  price?: string | number | undefined;
+  total?: boolean;
 }
 
-export default function PriceCard({ text, price }: PriceProps) {
+export default function PriceCard({ text, price, total }: PriceProps) {
   return (
-    <div className="mx-2 rounded-2xl bg-gray-50 p-8 text-center text-lg md:text-xl">
-      <p className="mb-2 text-base">{text}</p>
-      <p className="text-xl font-bold text-brand md:text-2xl">${price}</p>
+    <div
+      className={`flex justify-between ${
+        total ? '' : 'border-b border-gray-200'
+      } py-4`}
+    >
+      <p
+        className={` ${
+          total ? 'text-lg font-medium text-gray-900' : 'text-gray-500'
+        }`}
+      >
+        {text}
+      </p>
+      <p
+        className={` ${
+          total ? 'text-lg font-medium text-gray-900' : 'text-gray-800'
+        }`}
+      >
+        ${price}
+      </p>
     </div>
   );
 }
