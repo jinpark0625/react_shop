@@ -1,4 +1,4 @@
-import { faqData } from 'data/Home/homeData';
+import { FAQ_DATA } from 'data/Home/homeData';
 
 export default function Faq() {
   return (
@@ -26,7 +26,7 @@ export default function Faq() {
         {/* contents */}
         <div className="col-span-2 mx-auto">
           <dl className="flex flex-col gap-16">
-            {faqData.map((feature) => (
+            {FAQ_DATA.map((feature) => (
               <div key={feature.name} className="relative pl-16">
                 <dt className="text-lg font-semibold leading-7 text-gray-900">
                   <div
