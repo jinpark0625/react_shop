@@ -1,8 +1,7 @@
 import Main from 'components/Home/Main';
 import Intro from 'components/Home/Intro';
 import IntroRarity from 'components/Home/IntroRarity';
-import ProductSlide from 'components/Home/ProductSlide';
-import NftSlide from 'components/Home/NftSlide';
+import SlideContainer from 'components/Home/SlideContainer';
 import Faq from 'components/Home/Faq';
 
 const Home = () => {
@@ -11,8 +10,7 @@ const Home = () => {
       <Main />
       <Intro />
       <IntroRarity />
-      <NftSlide />
-      <ProductSlide />
+      <SlideContainer />
       <Faq />
     </>
   );
