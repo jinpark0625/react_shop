@@ -1,4 +1,5 @@
 # Happy Jolly
+
 <img width="1304" alt="스크린샷 2023-02-20 오전 2 56 41" src="https://user-images.githubusercontent.com/69961780/220046017-7c1536c2-f7f3-4903-845b-acd6ec579a1e.png">
 Happy Jolly built with React.js, Typescript, Firebase, Cloudinary, react-query, and tailwind-css, this e-commerce website allows users to log in and shop for NFTs and products. Currently, the top administrator has the ability to register new products, and all users can view and manage the products in their cart through Firebase real-time database.
 
@@ -35,15 +36,25 @@ If you enter yarn start, your browser open http://localhost:3000/.
 - Custom hooks created with react-query to efficiently fetch data and keep the user interface smooth and responsive.
 
 ### v0.1.0
+
 - Sign up new users with email
 - Update a user's profile: Users can update their profile information.
 - Upload file with firebase storage
 - Form validation: The application includes form validation to ensure that users provide accurate and complete information when signing up or updating their profile
 
 ### v0.2.0
+
 - Code Refactoring and Optimization
 - UI Enhancements
-- Products data in Firebase storage has been updated 
+- Products data in Firebase storage has been updated
+
+### v0.3.0
+
+- Code Refactoring and Optimization
+- Implemented product and NFT filtering options to improve user experience.
+- Utilized the Infinite Scrolling technique to fetch NFT API data dynamically.
+- Leveraged the Supabase platform for PostgreSQL support, enabling more advanced queries for NFT data storage compared to Firebase.
+- Integrated with the OpenSea API to obtain NFT data.
 
 <br/>
 
@@ -52,15 +63,16 @@ If you enter yarn start, your browser open http://localhost:3000/.
 <b>Main Library</b> : React <br/>
 <b>Main Language and Syntax</b> : Typescript, Javascript ES6+, JSX <br/>
 <b>State Managemen</b> : useContext <br/>
-<b>Server</b> : firebase <br/>
+<b>Server</b> : firebase, supabase <br/>
 <b>UI Library</b> : Tailwind css, React-icons <br/>
-<b>Others</b> : git, Babel, eslint, prettier, React-query, React-hook-form <br/>
+<b>Others</b> : git, Babel, eslint, prettier, React-query, React-hook-form, axios <br/>
 
 <br/>
 
 ## Preview
 
 ### v0.1.0
+
 <table width="100%">
   <thead>
     <tr>
@@ -89,6 +101,7 @@ If you enter yarn start, your browser open http://localhost:3000/.
 </table>
 
 ### v0.2.0
+
 <table width="100%">
   <thead>
     <tr>
@@ -116,11 +129,42 @@ If you enter yarn start, your browser open http://localhost:3000/.
   </tbody>
 </table>
 
+### v0.3.0
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="50%">Collection Page</th>
+      <th width="50%">Product Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td width="50%"><img src="https://user-images.githubusercontent.com/69961780/226156864-b156bcc8-46f7-4396-9538-aabe8e879274.png"/></td>
+      <td width="50%"><img src="https://user-images.githubusercontent.com/69961780/226156884-1e6758d7-cc97-4f39-a157-7bab65dac132.gif"/></td>
+    </tr>
+  </tbody>
+    <thead>
+    <tr>
+      <th width="50%">NFT Collection Page</th>
+      <th width="50%">NFT Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td width="50%"><img src="https://user-images.githubusercontent.com/69961780/226156906-44750306-cc6a-4b04-9b44-d677aaa4a5d8.png"/></td>
+      <td width="50%"><img src="https://user-images.githubusercontent.com/69961780/226156913-86cfb263-c68e-4fe3-9f97-cca86cb44468.gif"/></td>
+    </tr>
+  </tbody>
+</table>
+
 ## Future Development
 
 This project is in its early stages of development, with future plans to implement additional features such as:
 
 - ~~Membership and login through firebase storage~~
 - ~~Enhance the website's UI, making it even more visually appealing and user-friendly.~~
+- ~~Retrieve products and NFT data from APIs and filter by options.~~
+- ~~Use the OpenSea API to retrieve NFT data and integrate Supabase for more complex queries on NFT data.~~
 - Get NFT Metadata and Update user's contract address
 - Add Express Checkout by Paypal
