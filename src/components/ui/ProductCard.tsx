@@ -1,30 +1,51 @@
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { TagIcon } from '@heroicons/react/24/outline';
-
-interface IProps {
+import { Link } from 'react-router-dom';
+import ErrorMessage from './ErrorMessage';
+interface ProductCardProps {
+  id?: number;
   image?: string | string[];
   description: string;
   title: string;
   price: number;
   category: string;
+  sizes: string[];
+  highlights?: string[];
+  details?: string;
+  tags?: string;
 }
 
 export default function ProductCard({
+  id,
   image,
   description,
   title,
   price,
   category,
-}: IProps) {
+  sizes,
+  highlights,
+  details,
+  tags,
+}: ProductCardProps) {
+  if (!id) return <ErrorMessage />;
+
   return (
-    <>
+    <Link
+      to={`/product/${id}`}
+      state={{
+        id,
+        image,
+        title,
+        description,
+        category,
+        price,
+        sizes,
+        highlights,
+        details,
+      }}
+    >
       <div className="relative overflow-hidden rounded-2xl bg-gray-100 pt-[100%]">
-        <div
-          className="absolute 
-      inset-0 translate-x-1/2
-      translate-y-1/2
-      "
-        >
+        <div className="absolute inset-0 translate-x-1/2 translate-y-1/2">
           <LazyLoadImage
             src={image && Array.isArray(image) ? image[0] : image}
             alt={description}
@@ -48,10 +69,10 @@ export default function ProductCard({
 
           <p className="flex items-center text-sm text-gray-500">
             <TagIcon className="mr-2 h-4 w-4" />
-            {category}
+            {tags}
           </p>
         </div>
       </div>
-    </>
+    </Link>
   );
 }
