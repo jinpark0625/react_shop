@@ -1,7 +1,7 @@
 import { GlobeEuropeAfricaIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import MainImage from './MainImage';
-import { mainData } from 'data/Home/homeData';
+import { MAINDATA } from 'data/Home/homeData';
 
 export default function Main() {
   return (
@@ -43,7 +43,7 @@ export default function Main() {
               </div>
             </div>
             <div className="relative flex h-96 justify-center	">
-              {mainData.map(
+              {MAINDATA.map(
                 ({
                   name,
                   price,
