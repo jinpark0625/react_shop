@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -14,6 +13,10 @@ import ProtectedRoute from './pages/ProtectedRoute';
 import Register from './pages/Auth/Register';
 import AuthProtectedRoute from 'pages/AuthProtectedRoute';
 import Login from './pages/Auth/Login';
+import Collections from 'pages/Product/Collections';
+import Nfts from 'pages/NFT/Nfts';
+import NftDetail from 'pages/NFT/NftDetail';
+import { StrictMode } from 'react';
 
 const router = createBrowserRouter([
   {
@@ -27,8 +30,16 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/category',
+        path: '/collections',
+        element: <Collections />,
+      },
+      {
+        path: '/collections/:id',
         element: <Category />,
+      },
+      {
+        path: '/product/:id',
+        element: <Product />,
       },
       {
         path: '/addProduct',
@@ -39,16 +50,20 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/product/:id',
-        element: <Product />,
-      },
-      {
         path: '/carts',
         element: (
-          // <ProtectedRoute>
-          <MyCart />
-          // </ProtectedRoute>
+          <ProtectedRoute>
+            <MyCart />
+          </ProtectedRoute>
         ),
+      },
+      {
+        path: '/nfts',
+        element: <Nfts />,
+      },
+      {
+        path: '/nfts/:id',
+        element: <NftDetail />,
       },
       {
         path: '/register',
@@ -74,9 +89,9 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>,
+  <StrictMode>
+    <RouterProvider router={router} />,
+  </StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function
