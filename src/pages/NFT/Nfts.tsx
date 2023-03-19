@@ -16,6 +16,7 @@ import useSortParams from 'hooks/useSortParams';
 import ErrorMessage from 'components/ui/ErrorMessage';
 import { NftFilter, NftFilterHeader } from 'components/Nft/NftFilter';
 import { FILTERITEM, LOADING_ARRAY } from 'data/Products/Menus';
+import { deduplicateByOptions } from 'utils/collectionUtils';
 
 const Nfts = () => {
   const {
@@ -47,27 +48,22 @@ const Nfts = () => {
   );
 
   useEffect(() => {
-    filterData && deduplicateByOptions(filterData);
+    filterData && deduplicate(filterData);
   }, [filterData]);
 
-  const deduplicateByOptions = useCallback((nfts: NftType[]) => {
-    if (nfts) {
-      const filters: Array<{ [key: string]: string[] }> = [];
+  const deduplicate = useCallback((nfts: NftType[]) => {
+    const filters: Array<{ [key: string]: string[] }> = [];
 
-      FILTERITEM.map((value) => {
-        const deduplicatedArray = Array.from(
-          new Set(
-            nfts?.flatMap((nft) => nft[value.toLowerCase() as keyof NftType]),
-          ),
-        ) as string[];
-        const filterObject = {
-          [value]: deduplicatedArray,
-        };
-        return filters.push(filterObject);
-      });
+    FILTERITEM.map((value) => {
+      const lowerCaseValue = value.toLowerCase() as keyof NftType;
+      const deduplicatedArray = deduplicateByOptions(nfts, lowerCaseValue);
+      const filterObject = {
+        [value]: deduplicatedArray,
+      };
+      return filters.push(filterObject);
+    });
 
-      setFilters(filters);
-    }
+    setFilters(filters);
   }, []);
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
