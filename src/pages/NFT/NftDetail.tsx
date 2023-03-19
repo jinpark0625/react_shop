@@ -62,7 +62,7 @@ const NftDetail = () => {
 
   return (
     <main className="mx-auto mb-32 w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-      <section className="flex h-[calc(100vh-64px)] flex-col items-center justify-center">
+      <section className="flex h-[calc(100vh-65px)] flex-col items-center justify-center">
         {isLoading && (
           <div className="h-[519px] w-[260px] animate-pulse rounded-2xl bg-gray-50 sm:w-[320px]"></div>
         )}
