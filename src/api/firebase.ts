@@ -11,6 +11,9 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
   Auth,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
+  updatePassword as editPassword,
 } from 'firebase/auth';
 import { Dispatch, SetStateAction } from 'react';
 import { getDatabase, ref, set, get, remove } from 'firebase/database';
@@ -60,6 +63,10 @@ interface ProductQueryType {
   sizes?: string;
   sort?: string;
   item?: string;
+}
+interface ProfileOption {
+  displayName?: string;
+  photoURL?: string;
 }
 
 // Initialize Firebase
@@ -129,6 +136,26 @@ async function adminUser(user: User) {
       return user;
     });
 }
+
+export async function reauthenticate(
+  email: string,
+  currentPassword: string,
+  newPassword: string,
+) {
+  const user = auth.currentUser;
+  if (user) {
+    const cred = EmailAuthProvider.credential(email, currentPassword);
+    await reauthenticateWithCredential(user, cred)
+      .then(async () => {
+        return await updatePassword(newPassword);
+      })
+      .catch((e) => {
+        throw new Error(getErrorMessage(e));
+      });
+  }
+}
+
+// export async function changePassword() {}
 
 /** Products State */
 export async function addNewProduct(product: ProductType, image: URL) {
@@ -227,18 +254,49 @@ async function uploadImage(image: ImageType): Promise<string> {
   return 'default';
 }
 
-async function updateUserProfile(user: User, name: string, image: string) {
-  await updateProfile(user, {
-    displayName: name,
-    photoURL: image,
+export async function editUser(name: string, image: ImageType) {
+  const currentUser = auth.currentUser;
+
+  if (currentUser) {
+    const profileOption: ProfileOption = {
+      ...(image && { photoURL: await uploadImage(image) }),
+      displayName: name,
+    };
+
+    await updateProfile(currentUser, profileOption)
+      .then((res) => res)
+      .catch((e) => {
+        throw new Error(getErrorMessage(e));
+      });
+  }
+}
+
+async function updatePassword(password: string) {
+  onAuthStateChanged(auth, (user: User | null) => {
+    if (user) {
+      editPassword(user, password)
+        .then((res) => res)
+        .catch((e) => {
+          throw new Error(getErrorMessage(e));
+        });
+    }
   });
+}
+
+async function updateUserProfile(user: User, option: ProfileOption) {
+  await updateProfile(user, option);
 }
 
 export async function signUp({ email, name, password, image }: SignUpType) {
   try {
     const userCredential = await createUser(auth, email, password);
-    const photoUrl = await uploadImage(image);
-    return await updateUserProfile(userCredential.user, name, photoUrl);
+
+    const profileOption: ProfileOption = {
+      ...(image && { photoURL: await uploadImage(image) }),
+      displayName: name,
+    };
+
+    return await updateUserProfile(userCredential.user, profileOption);
   } catch (e) {
     throw new Error(getErrorMessage(e));
   }
