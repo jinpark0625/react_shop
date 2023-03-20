@@ -71,11 +71,11 @@ const Modal = ({
                     <div className="mt-6 sm:text-left">
                       <Dialog.Title
                         as="h3"
-                        className="text-center text-base font-semibold leading-6 text-gray-900"
+                        className="text-center text-xl font-semibold leading-6 text-gray-900"
                       >
                         {title}
                       </Dialog.Title>
-                      <div className="mt-2 text-center text-sm text-gray-500">
+                      <div className="mt-3 text-center text-sm text-gray-500">
                         {content.split('\n').map((txt) => (
                           <p key={txt}>
                             {txt}
