@@ -11,7 +11,7 @@ interface RouteProps {
 
 export default function ProtectedRoute({ children, requireAdmin }: RouteProps) {
   const { ...contextData } = useAuthContext();
-  const { user } = contextData;
+  const { user, loading } = contextData;
 
   const userData = user ?? null;
   const isAdmin = userData?.isAdmin;
@@ -21,6 +21,8 @@ export default function ProtectedRoute({ children, requireAdmin }: RouteProps) {
   const moveToHome = () => {
     navigate('/', { replace: true });
   };
+
+  if (loading) return null;
 
   if (!userData || (requireAdmin && !isAdmin)) {
     return (
