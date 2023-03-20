@@ -1,5 +1,5 @@
 import { useState, forwardRef, useEffect } from 'react';
-
+import { FILE_SIZE_MAX_LIMIT, IMAGE_INPUT_CLASS } from 'data/Auth/authData';
 interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   watchImage: FileList | null;
@@ -7,13 +7,6 @@ interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   initiateImage: () => void;
   clearError: () => void;
 }
-
-const FILE_SIZE_MAX_LIMIT = 2 * 1024 * 1024;
-
-const INPUT_CLASS = `block h-[58px] w-full rounded-r-lg text-sm text-slate-500
-file:mr-4 file:rounded-full file:border-0
-file:bg-violet-50 file:py-1 file:px-4 file:text-sm
-file:font-semibold file:text-violet-700 hover:file:bg-violet-100`;
 
 const ImageInput = forwardRef<HTMLInputElement, IProps>(
   (
@@ -52,7 +45,9 @@ const ImageInput = forwardRef<HTMLInputElement, IProps>(
               {...props}
               type="file"
               className={`${
-                error ? `border-red-500 ${INPUT_CLASS}` : INPUT_CLASS
+                error
+                  ? `border-red-500 ${IMAGE_INPUT_CLASS}`
+                  : IMAGE_INPUT_CLASS
               }`}
               accept="image/png,image/jpeg,image/jpg,image/webp"
             />
