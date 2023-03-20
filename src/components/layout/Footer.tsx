@@ -90,8 +90,11 @@ export default function Footer() {
             <ul className="mb-4 flex md:order-1 md:ml-4 md:mb-0">
               {footerSocial.map(({ path, link, name }, i) => (
                 <li key={name} className={`${i === 0 ? '' : 'ml-4'}`}>
-                  <Link
-                    to={link}
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.open(link, '_blank');
+                    }}
                     className="hover:bg-white-100 flex items-center justify-center rounded-full bg-white text-gray-600 shadow transition duration-150 ease-in-out hover:text-gray-900"
                     aria-label={name}
                   >
@@ -102,7 +105,7 @@ export default function Footer() {
                     >
                       <path d={path} />
                     </svg>
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>
