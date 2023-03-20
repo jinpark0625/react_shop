@@ -247,7 +247,7 @@ const MenuDesktop = forwardRef<HTMLButtonElement, menuProps>(
                                     <div className="relative grid  bg-white ">
                                       <div className="p-4">
                                         <Popover.Button
-                                          onClick={() => navigate('/')}
+                                          onClick={() => navigate('/memober')}
                                           className="flex w-full items-center rounded-lg p-3 hover:bg-gray-50"
                                         >
                                           <PencilSquareIcon className="h-4 w-4" />
