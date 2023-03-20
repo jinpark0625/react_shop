@@ -42,7 +42,7 @@ export default function Register() {
           navigate('/', { replace: true });
         },
         onError: (err) => {
-          if (String(err).indexOf('email-already-in-use')) {
+          if (String(err).includes('email-already-in-use')) {
             setError(
               'email',
               { message: 'A user with that email already exists.' },
@@ -97,6 +97,8 @@ export default function Register() {
               labelText="Email"
               type="email"
               className="mb-3"
+              autofocus
+              autocomplete="on"
             />
 
             <Input
@@ -112,6 +114,7 @@ export default function Register() {
               labelText="Name"
               type="text"
               className="mb-3"
+              autocomplete="on"
             />
 
             <Input
@@ -131,6 +134,7 @@ export default function Register() {
               labelText="Password"
               type="password"
               className="mb-3"
+              autocomplete="off"
             />
 
             <Input
@@ -144,12 +148,18 @@ export default function Register() {
                   value: 20,
                   message: 'Password needs to be between 6 to 20 characters.',
                 },
+                validate: (val: string) => {
+                  if (watch('password') !== val) {
+                    return 'Please make sure your passwords match.';
+                  }
+                },
               })}
               error={errors.confirmPassword?.message}
               ariaInvalid={isDirty}
               labelText="Confirm Password"
               type="password"
               className="mb-3"
+              autocomplete="off"
             />
             <ImageInput
               {...register('image')}
