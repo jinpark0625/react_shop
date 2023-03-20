@@ -214,7 +214,7 @@ export default function MenuMobile({
                     </div>
                     <div className="flex flex-col">
                       <Link
-                        to="/"
+                        to="/member"
                         className="mb-4 font-medium text-gray-900"
                         onClick={() => {
                           setOpen(false);
