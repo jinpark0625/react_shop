@@ -61,10 +61,19 @@ export default function Login() {
           navigate('/');
         },
         onError: (err) => {
-          if (String(err).indexOf('wrong-password')) {
+          if (String(err).includes('wrong-password')) {
             setError(
               'password',
               { message: 'Username or password did not match.' },
+              { shouldFocus: true },
+            );
+          } else if (String(err).includes('auth/too-many-requests')) {
+            setError(
+              'password',
+              {
+                message:
+                  'Your account has been temporarily disabled due to many failed login attempts.',
+              },
               { shouldFocus: true },
             );
           }
@@ -74,7 +83,7 @@ export default function Login() {
   };
 
   return (
-    <section className="m-auto grid min-h-[calc(100vh-64px)] w-full grid-cols-10">
+    <section className="m-auto grid min-h-[calc(100vh-65px)] w-full grid-cols-10">
       {loginQuery.isLoading && <Loading />}
       <div className="col-span-10 flex h-full w-full grow flex-col items-center justify-center bg-white shadow-slate-50 drop-shadow-md lg:col-span-4">
         <div className="mb-14 flex-col items-center text-center">
@@ -101,6 +110,8 @@ export default function Login() {
               labelText="Email"
               type="email"
               className="mb-3"
+              autofocus
+              autocomplete="on"
             />
 
             <Input
@@ -120,6 +131,7 @@ export default function Login() {
               labelText="Password"
               type="password"
               className="mb-10"
+              autocomplete="off"
             />
 
             <Button
