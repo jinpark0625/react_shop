@@ -5,6 +5,8 @@ import {
   onUserStateChange,
   logout,
   login,
+  reauthenticate,
+  editUser,
 } from '../api/firebase';
 import { useAuthContext } from '../context/AuthContext';
 
@@ -17,9 +19,20 @@ interface IProps {
   image: imageType;
 }
 
-interface loginProps {
+interface LoginProps {
   email: string;
   password: string;
+}
+
+interface EditPasswordProps {
+  email: string;
+  currentPassword: string;
+  password: string;
+}
+
+interface EditAccountProps {
+  name: string;
+  image: FileList | null;
 }
 
 export default function useUser() {
@@ -35,7 +48,7 @@ export default function useUser() {
   });
 
   const loginQuery = useMutation(
-    async (data: loginProps) => await loginEmail(data.email, data.password),
+    async (data: LoginProps) => await loginEmail(data.email, data.password),
     {
       onSuccess: async () => onUserStateChange(setUser, setLoading),
     },
@@ -45,5 +58,29 @@ export default function useUser() {
     onSuccess: async () => onUserStateChange(setUser, setLoading),
   });
 
-  return { loginGoogleQuery, loginQuery, signUpQuery, logOutQuery };
+  const editPasswordQuery = useMutation(
+    async (data: EditPasswordProps) =>
+      await reauthenticate(data.email, data.currentPassword, data.password),
+    {
+      onSuccess: async () => onUserStateChange(setUser, setLoading),
+    },
+  );
+
+  const editAccount = useMutation(
+    async (data: EditAccountProps) => {
+      return await editUser(data.name, data.image);
+    },
+    {
+      onSuccess: async () => onUserStateChange(setUser, setLoading),
+    },
+  );
+
+  return {
+    loginGoogleQuery,
+    loginQuery,
+    signUpQuery,
+    logOutQuery,
+    editPasswordQuery,
+    editAccount,
+  };
 }
