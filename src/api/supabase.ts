@@ -42,7 +42,6 @@ export async function fetchNFT({ query, pageParam }: NFTQueryType) {
 
         supabaseQuery = supabaseQuery.filter(key, 'in', inClause);
       } else {
-        console.log(key, value);
         supabaseQuery = supabaseQuery.filter(key, 'eq', value);
       }
     }
