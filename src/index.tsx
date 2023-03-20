@@ -16,7 +16,8 @@ import Login from './pages/Auth/Login';
 import Collections from 'pages/Product/Collections';
 import Nfts from 'pages/NFT/Nfts';
 import NftDetail from 'pages/NFT/NftDetail';
-import { StrictMode } from 'react';
+import Member from 'pages/Auth/Member';
+// import { StrictMode } from 'react';
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,14 @@ const router = createBrowserRouter([
           </AuthProtectedRoute>
         ),
       },
+      {
+        path: '/member',
+        element: (
+          <ProtectedRoute>
+            <Member />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);
@@ -89,9 +98,9 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
-  <StrictMode>
-    <RouterProvider router={router} />,
-  </StrictMode>,
+  // <StrictMode>
+  <RouterProvider router={router} />,
+  // </StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function
