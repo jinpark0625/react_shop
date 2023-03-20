@@ -6,14 +6,32 @@ interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   ariaInvalid?: boolean;
   type: string;
   error?: string;
+  value?: string;
+  disabled?: boolean;
+  autocomplete?: string;
+  autofocus?: boolean;
 }
 
 const LABEL_CLASS = `duration absolute top-px left-2 -translate-y-1/2 scale-75 bg-white px-1 transition-all origin-left	
 peer-placeholder-shown:top-7 peer-placeholder-shown:left-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-slate-500
-peer-focus:top-px peer-focus:left-2 peer-focus:scale-75 peer-focus:text-sky-500 pointer-events-none	`;
+peer-focus:top-px peer-focus:left-2 peer-focus:scale-75 peer-focus:text-violet-500 pointer-events-none	`;
 
 const Input = React.forwardRef<HTMLInputElement, IProps>(
-  ({ labelText, className, type, ariaInvalid, error, ...props }, ref) => {
+  (
+    {
+      labelText,
+      className,
+      type,
+      ariaInvalid,
+      error,
+      value,
+      disabled,
+      autocomplete,
+      autofocus,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <>
         <div
@@ -30,6 +48,10 @@ const Input = React.forwardRef<HTMLInputElement, IProps>(
             type={type}
             aria-invalid={!ariaInvalid ? undefined : error ? 'true' : 'false'}
             placeholder=" "
+            value={value}
+            disabled={disabled}
+            autoFocus={autofocus}
+            autoComplete={autocomplete}
           />
           <label className={LABEL_CLASS}>{labelText}</label>
           {error && (
