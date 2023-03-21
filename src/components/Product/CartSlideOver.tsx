@@ -3,15 +3,15 @@ import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { SelectedProductType } from 'utils/interfaces';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { Link } from 'react-router-dom';
+import { Link, NavigateFunction } from 'react-router-dom';
 import Button from 'components/ui/Button';
 import LoadingSkeleton from 'components/ui/LoadingSkeleton';
-
 interface CartSlideOverProps {
   isLoading: boolean;
   cartError?: Error | null;
   cartItems: SelectedProductType[] | undefined;
   deleteCartItem: (id: number) => void;
+  navigate: NavigateFunction;
 }
 
 const CartSlideOver = ({
@@ -19,6 +19,7 @@ const CartSlideOver = ({
   cartError,
   cartItems,
   deleteCartItem,
+  navigate,
 }: CartSlideOverProps) => {
   const [open, setOpen] = useState(true);
 
@@ -156,7 +157,7 @@ const CartSlideOver = ({
                         <Button
                           text="Checkout"
                           className="flex w-full items-center justify-center rounded-md border border-transparent bg-violet-500 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-violet-600"
-                          onClick={() => alert('Not Yet')}
+                          onClick={() => navigate('/checkout')}
                         />
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
