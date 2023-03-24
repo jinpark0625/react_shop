@@ -256,7 +256,7 @@ const MenuDesktop = forwardRef<HTMLButtonElement, menuProps>(
                                           </p>
                                         </Popover.Button>
                                         <Popover.Button
-                                          onClick={() => navigate('/')}
+                                          onClick={() => navigate('/history')}
                                           className="flex w-full items-center rounded-lg p-3 hover:bg-gray-50"
                                         >
                                           <ClockIcon className="h-4 w-4" />
