@@ -223,7 +223,7 @@ export default function MenuMobile({
                         Edit Profile
                       </Link>
                       <Link
-                        to="/"
+                        to="/history"
                         className="mb-4 font-medium text-gray-900"
                         onClick={() => {
                           setOpen(false);
