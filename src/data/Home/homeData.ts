@@ -6,7 +6,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 // Main
-export const MAINDATA = [
+export const MAIN_DATA = [
   {
     name: 'Happy Jolly #61',
     price: 0.01,
