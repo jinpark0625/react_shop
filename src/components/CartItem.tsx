@@ -44,7 +44,7 @@ export default function CartItem({
         <div className="w-full">
           <p className="text-lg">{title}</p>
           <p className="mt-1 text-sm text-gray-500">Size: {size}</p>
-          <p className="mt-2">${price}</p>
+          <p className="mt-2 font-semibold">${price}</p>
         </div>
         <div className="mt-4 flex justify-end md:m-0">
           <div className="relative max-w-[66px]">
