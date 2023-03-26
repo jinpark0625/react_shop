@@ -10,6 +10,7 @@ interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   disabled?: boolean;
   autocomplete?: string;
   autofocus?: boolean;
+  inputClassName?: string;
 }
 
 const LABEL_CLASS = `duration absolute top-px left-2 -translate-y-1/2 scale-75 bg-white px-1 transition-all origin-left	
@@ -28,6 +29,7 @@ const Input = React.forwardRef<HTMLInputElement, IProps>(
       disabled,
       autocomplete,
       autofocus,
+      inputClassName,
       ...props
     },
     ref,
@@ -44,7 +46,7 @@ const Input = React.forwardRef<HTMLInputElement, IProps>(
             {...props}
             className={`peer w-full rounded-lg ${
               error ? 'border-red-500' : ''
-            }`}
+            } ${inputClassName ?? ''}`}
             type={type}
             aria-invalid={!ariaInvalid ? undefined : error ? 'true' : 'false'}
             placeholder=" "
