@@ -30,7 +30,7 @@ export default function Intro() {
           </div>
           <div className="relative inline-block w-full after:absolute after:-bottom-48 after:left-1/2  after:block after:h-72 after:w-72 after:-translate-x-1/2 after:rounded-full after:bg-pink-300">
             <LazyLoadImage
-              src="images/intro_image_6.webp"
+              src="images/intro_image.webp"
               width={300}
               height={200}
               placeholder={<ImagePlaceholder />}
