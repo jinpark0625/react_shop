@@ -1,6 +1,6 @@
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment, useState, useEffect } from 'react';
-import { sortOptions } from 'data/Products/Menus';
+import { SORT_OPTIONS } from 'data/Products';
 
 interface CategorySortProps {
   setSortParams: (key: string, value: string) => void;
@@ -68,7 +68,7 @@ const CategorySort = ({
     >
       <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black/5 focus:outline-none">
         <div className="py-1">
-          {sortOptions.map(({ name, query }) => (
+          {SORT_OPTIONS.map(({ name, query }) => (
             <Menu.Item key={name}>
               <button
                 className={`block w-full px-4 py-2 text-sm 
