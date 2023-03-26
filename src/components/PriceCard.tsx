@@ -20,7 +20,7 @@ export default function PriceCard({ text, price, total }: PriceProps) {
       </p>
       <p
         className={` ${
-          total ? 'text-lg font-medium text-gray-900' : 'text-gray-800'
+          total ? 'text-lg font-semibold text-gray-900' : 'text-gray-800'
         }`}
       >
         ${price}
