@@ -15,6 +15,9 @@ import ContactForm from 'components/Order/ContactForm';
 import CreditForm from 'components/Order/CreditForm';
 import useContactForm from 'hooks/useContactForm';
 import useCheckout from 'hooks/useCheckout';
+import Paypal from 'components/Order/Paypal';
+import { v4 as uuid } from 'uuid';
+import moment from 'moment';
 
 const Checkout = () => {
   const { ...contextData } = useAuthContext();
@@ -60,6 +63,8 @@ const Checkout = () => {
   });
 
   const [focused, setFocused] = useState<Focused | undefined>(undefined);
+  const [paypalOrderId, setPaypalOrderId] = useState('');
+  const [paypalError, setPaypalError] = useState(false);
 
   const { number, name, expiry, cvc } = useGetCardForm({
     control: cardControl,
@@ -71,17 +76,16 @@ const Checkout = () => {
   };
 
   const onSubmit = (data: any) => {
-    if (paymentMethod === 'paypal' && data && cartData) {
-      console.log('paypal');
-    } else if (data && cartData) {
-      cardSubmit(onSubmitCardData, onError)()
-        .then((res) => {
-          const [cartItem] = cartData;
+    if (cartData) {
+      if (paymentMethod === 'paypal' && data) {
+        if (paypalOrderId) {
           const orderData = {
             ...data,
-            product: { ...cartItem },
+            orderNumber: uuid(),
+            orderDate: moment().format('DD-MM-YYYY hh:mm:ss'),
+            product: cartData,
           };
-
+          setPaypalError(false);
           addItemToOrder.mutate(orderData, {
             onSuccess: () => {
               navigate(`/checkout/success/${user?.uid ?? ''}`, {
@@ -92,8 +96,31 @@ const Checkout = () => {
               });
             },
           });
-        })
-        .catch((err) => err);
+        } else {
+          setPaypalError(true);
+        }
+      } else if (data) {
+        cardSubmit(onSubmitCardData, onError)()
+          .then((res) => {
+            const orderData = {
+              ...data,
+              orderNumber: uuid(),
+              orderDate: moment().format('DD-MM-YYYY hh:mm:ss'),
+              product: cartData,
+            };
+            addItemToOrder.mutate(orderData, {
+              onSuccess: () => {
+                navigate(`/checkout/success/${user?.uid ?? ''}`, {
+                  replace: true,
+                  state: {
+                    orderData,
+                  },
+                });
+              },
+            });
+          })
+          .catch((err) => err);
+      }
     }
   };
 
@@ -105,15 +132,14 @@ const Checkout = () => {
       </div>
     );
 
-  // No Item in Cart
-  if (cartData?.length === 0) return <Navigate to="/" replace />;
-
   return (
     <main className="mx-auto mb-32 w-full max-w-7xl  px-4 pt-24 sm:px-6  lg:px-8">
       <ProductTitle title="Checkout" />
 
       {/* Loading */}
       {isLoading && <CheckoutLoading />}
+
+      {cartData?.length === 0 && <Navigate to="/" replace />}
 
       {/* Information */}
       <section className="mt-4 flex flex-wrap gap-20 lg:flex-nowrap">
@@ -132,9 +158,15 @@ const Checkout = () => {
             setFocused={setFocused}
             cardRegister={cardRegister}
             cardFormState={cardFormState}
-            // cardSubmit={cardSubmit}
-            // onSubmit={handleCardSubmit}
           />
+          {paymentMethod === 'paypal' && (
+            <Paypal
+              setPaypalOrderId={setPaypalOrderId}
+              cartData={cartData}
+              paypalError={paypalError}
+              setPaypalError={setPaypalError}
+            />
+          )}
         </article>
         {/* Product */}
         <article className="w-full lg:w-1/2">
