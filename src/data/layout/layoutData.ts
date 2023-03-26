@@ -71,19 +71,19 @@ export const footerMarketPlace = [
 export const footerResource = [
   {
     name: 'Documentation',
-    link: '/',
+    link: 'https://github.com/jinpark0625',
   },
   {
     name: 'Help Center',
-    link: '/',
+    link: 'https://github.com/jinpark0625',
   },
   {
     name: 'Blog',
-    link: '/',
+    link: 'https://github.com/jinpark0625',
   },
   {
     name: 'Support Center',
-    link: '/',
+    link: 'https://github.com/jinpark0625',
   },
 ];
 
@@ -94,11 +94,11 @@ export const footerCompany = [
   },
   {
     name: 'About us',
-    link: '/',
+    link: 'https://github.com/jinpark0625',
   },
   {
     name: 'Privacy Policy',
-    link: '/',
+    link: 'https://github.com/jinpark0625',
   },
 ];
 
