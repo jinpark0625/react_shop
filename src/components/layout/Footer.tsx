@@ -55,6 +55,7 @@ export default function Footer() {
               {footerResource.map(({ name, link }) => (
                 <li className="mb-2" key={name}>
                   <Link
+                    target="_blank"
                     to={link}
                     className="text-gray-600 transition duration-150 ease-in-out hover:text-gray-900"
                   >
@@ -73,6 +74,7 @@ export default function Footer() {
                 <li className="mb-2" key={name}>
                   <Link
                     to={link}
+                    target="_blank"
                     className="text-gray-600 transition duration-150 ease-in-out hover:text-gray-900"
                   >
                     {name}
@@ -114,6 +116,7 @@ export default function Footer() {
               Made by{' '}
               <Link
                 className="text-blue-600 hover:underline"
+                target="_blank"
                 to="https://github.com/jinpark0625?tab=repositories"
               >
                 Jin Park
