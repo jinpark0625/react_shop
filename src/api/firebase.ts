@@ -27,7 +27,15 @@ import {
   orderBy,
 } from 'firebase/firestore';
 import { v4 as uuid } from 'uuid';
-import { ProductType, SelectedProductType } from '../utils/interfaces';
+import {
+  ProductType,
+  SelectedProductType,
+  ImageBlob,
+  ProductQueryType,
+  ProfileOption,
+  SignUpType,
+  CheckoutFormTypes,
+} from '../utils/interfaces';
 import {
   getStorage,
   ref as uploadRef,
@@ -46,28 +54,9 @@ const firebaseConfig = {
 
 // type
 type DispatchType = Dispatch<SetStateAction<User | null>>;
-type setLoading = Dispatch<SetStateAction<boolean>>;
-
+type SetLoadingType = Dispatch<SetStateAction<boolean>>;
+type ValueTypes = SelectedProductType | CheckoutFormTypes;
 type ImageType = FileList | null | undefined;
-type ImageBlob = Blob | Uint8Array | ArrayBuffer;
-interface SignUpType {
-  email: string;
-  password: string;
-  name: string;
-  image?: ImageType;
-}
-interface ProductQueryType {
-  key?: string;
-  value?: string;
-  color?: string;
-  sizes?: string;
-  sort?: string;
-  item?: string;
-}
-interface ProfileOption {
-  displayName?: string;
-  photoURL?: string;
-}
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -108,7 +97,7 @@ export async function logout(): Promise<void> {
 
 export function onUserStateChange(
   callback: DispatchType,
-  setLoading: setLoading,
+  setLoading: SetLoadingType,
 ) {
   onAuthStateChanged(auth, (user: User | null) => {
     if (user) {
@@ -209,33 +198,32 @@ export async function getProducts({
   });
 }
 
-export async function getCart(userId: string) {
-  return await get(ref(database, `carts/${userId}`)) //
+export async function getCartOrOrderItem(
+  containerType: string,
+  userId: string,
+) {
+  return await get(ref(database, `${containerType}/${userId}`)) //
     .then((snapshot) => {
       const items = snapshot.val() || {};
       return Object.values(items);
     });
 }
 
-export async function addOrUpdateToCart(
+export async function addOrUpdateCartOrOrderItem(
+  containerType: string,
   userId: string,
-  product: SelectedProductType,
+  productId: number | string,
+  product: ValueTypes,
 ) {
-  return await set(ref(database, `carts/${userId}/${product.id}`), product);
+  return await set(
+    ref(database, `${containerType}/${userId}/${productId}`),
+    product,
+  );
 }
 
 export async function removeFromCart(userId: string, productId: number) {
   return await remove(ref(database, `carts/${userId}/${productId}`));
 }
-
-/**
- * @param auth : Auth
- * @param email : string type, user email
- * @param password : string type, user password
- * @param name : string type, user name
- * @param image : FileList type, user image (not required)
- * @returns
- */
 
 async function createUser(auth: Auth, email: string, password: string) {
   return await createUserWithEmailAndPassword(auth, email, password);
