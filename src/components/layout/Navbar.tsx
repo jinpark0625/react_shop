@@ -4,7 +4,7 @@ import { useAuthContext } from '../../context/AuthContext';
 import useUser from '../../hooks/useUser';
 import MenuMobile from './MenuMobile';
 import MenuDesktop from './MenuDesktop';
-import { classNames } from 'utils/collectionUtils';
+import { classNames } from 'utils/utils';
 
 export default function Navbar() {
   const { ...contextData } = useAuthContext();
