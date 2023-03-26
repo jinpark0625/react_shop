@@ -4,7 +4,11 @@ import {
   useQueryClient,
   UseQueryResult,
 } from '@tanstack/react-query';
-import { addOrUpdateToCart, getCart, removeFromCart } from '../api/firebase';
+import {
+  addOrUpdateCartOrOrderItem,
+  getCartOrOrderItem,
+  removeFromCart,
+} from '../api/firebase';
 import { useAuthContext } from '../context/AuthContext';
 import { SelectedProductType } from 'utils/interfaces';
 
@@ -16,7 +20,7 @@ export default function useCart() {
 
   const cartQuery: UseQueryResult<SelectedProductType[], Error> = useQuery(
     ['carts', uid || ''],
-    async () => await getCart(uid),
+    async () => await getCartOrOrderItem('carts', uid),
     {
       enabled: !!uid,
     },
@@ -24,7 +28,7 @@ export default function useCart() {
 
   const addOrUpdateItem = useMutation(
     async (product: SelectedProductType) =>
-      await addOrUpdateToCart(uid, product),
+      await addOrUpdateCartOrOrderItem('carts', uid, product.id, product),
     {
       onSuccess: () => {
         queryClient
