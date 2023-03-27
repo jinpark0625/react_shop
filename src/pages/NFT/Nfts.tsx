@@ -15,8 +15,8 @@ import useIntersect from 'hooks/useIntersect';
 import useSortParams from 'hooks/useSortParams';
 import ErrorMessage from 'components/ui/ErrorMessage';
 import { NftFilter, NftFilterHeader } from 'components/Nft/NftFilter';
-import { FILTERITEM, LOADING_ARRAY } from 'data/Products/Menus';
-import { deduplicateByOptions } from 'utils/collectionUtils';
+import { FILTERITEM, LOADING_ARRAY } from 'data/Products';
+import { deduplicateByOptions } from 'utils/utils';
 
 const Nfts = () => {
   const {
