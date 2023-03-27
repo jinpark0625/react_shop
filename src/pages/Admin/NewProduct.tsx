@@ -8,11 +8,17 @@ import { toast } from 'react-toast';
 
 const NewProduct = () => {
   const [product, setProduct] = useState<ProductType>({
+    id: 0,
     title: '',
     price: 0,
     category: '',
+    subCategory: '',
+    tags: '',
+    color: '',
     description: '',
     options: '',
+    sizes: [''],
+    image: [''],
   });
   const [file, setFile] = useState<File | undefined>(undefined);
   const [isUploading, setIsUploading] = useState<boolean>(false);
