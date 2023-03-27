@@ -102,7 +102,7 @@ const Product = () => {
 
   if (itemError) return <NotFound />;
 
-  if (!itemLoading) return <ProductLoading />;
+  if (itemLoading) return <ProductLoading />;
 
   return (
     <>
