@@ -7,7 +7,7 @@ import Home from './pages/Home/Home';
 import Category from './pages/Product/Category';
 import Product from './pages/Product/Product';
 import NewProduct from './pages/Admin/NewProduct';
-import MyCart from './pages/User/MyCart';
+import MyCart from './pages/Order/MyCart';
 import NotFound from './pages/NotFound';
 import ProtectedRoute from './pages/ProtectedRoute';
 import Register from './pages/Auth/Register';
@@ -17,6 +17,9 @@ import Collections from 'pages/Product/Collections';
 import Nfts from 'pages/NFT/Nfts';
 import NftDetail from 'pages/NFT/NftDetail';
 import Member from 'pages/Auth/Member';
+import Checkout from 'pages/Order/Checkout';
+import CheckoutSuccess from 'pages/Order/CheckoutSuccess';
+import Orders from 'pages/Order/Orders';
 // import { StrictMode } from 'react';
 
 const router = createBrowserRouter([
@@ -57,6 +60,26 @@ const router = createBrowserRouter([
             <MyCart />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: '/checkout',
+        element: (
+          <ProtectedRoute>
+            <Checkout />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/orders',
+        element: (
+          <ProtectedRoute>
+            <Orders />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/checkout/success/:id',
+        element: <CheckoutSuccess />,
       },
       {
         path: '/nfts',
