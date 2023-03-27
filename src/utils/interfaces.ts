@@ -75,3 +75,89 @@ export interface AccountInputs {
   confirmPassword: string;
   image: imageType;
 }
+
+// Checkout
+export type Focused = 'name' | 'number' | 'expiry' | 'cvc';
+export interface CardTypes {
+  number: string;
+  name: string;
+  expiry: string;
+  cvc: string;
+}
+
+export interface UserFormTypes {
+  email: string;
+  firstName: string;
+  lastName: string;
+  address: string;
+  apartment: string;
+  postalCode: string;
+  city: string;
+  state: string;
+  country: string;
+  paymentMethod: string;
+}
+
+// Histroy
+export interface OrderTypes {
+  address: string;
+  apartment: string;
+  city: string;
+  country: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  orderDate: string;
+  orderNumber: string;
+  paymentMethod: string;
+  postalCode: string;
+  state: string;
+  product: SelectedProductType[];
+}
+
+// Firebase
+
+export type ImageType = FileList | null | undefined;
+export type ImageBlob = Blob | Uint8Array | ArrayBuffer;
+export interface SignUpType {
+  email: string;
+  password: string;
+  name: string;
+  image?: ImageType;
+}
+export interface ProductQueryType {
+  key?: string;
+  value?: string;
+  color?: string;
+  sizes?: string;
+  sort?: string;
+  item?: string;
+}
+export interface ProfileOption {
+  displayName?: string;
+  photoURL?: string;
+}
+
+export interface CheckoutFormTypes {
+  email: string;
+  firstName: string;
+  lastName: string;
+  address: string;
+  apartment: string;
+  postalCode: string;
+  city: string;
+  state: string;
+  country: string;
+  paymentMethod: string;
+  product: [
+    {
+      id: number;
+      image: string;
+      title: string;
+      price: number;
+      option?: string;
+      size: string;
+      quantity: number;
+    },
+  ];
+}
