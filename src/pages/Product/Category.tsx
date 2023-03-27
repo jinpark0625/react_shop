@@ -1,8 +1,8 @@
 import Products from './Products';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { CATEGORIES } from 'data/Products/Menus';
-import { removeCollectionsPrefix } from 'utils/collectionUtils';
+import { CATEGORIES } from 'data/Products';
+import { removeCollectionsPrefix } from 'utils/utils';
 
 const Category = () => {
   const { pathname } = useLocation();
