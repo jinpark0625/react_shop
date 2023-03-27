@@ -13,12 +13,12 @@ import { NFT_LOADING_ARRAY } from 'data/Home/slideOptions';
 import ImagePlaceholder from '../../components/ui/ImagePlaceholder';
 import ProductCard from '../../components/ui/ProductCard';
 import CategorySort from 'components/Product/CategorySort';
-import { FILTERS } from 'data/Products/Menus';
+import { FILTERS } from 'data/Products';
 import FilterMobile from 'components/Product/FilterMobile';
 import FilterDesktop from 'components/Product/FilterDesktop';
 import Breadcrumbs from '../../components/Product/Breadcrumbs';
 import useSortParams from 'hooks/useSortParams';
-import { deduplicateByOptions } from 'utils/collectionUtils';
+import { deduplicateByOptions } from 'utils/utils';
 
 interface ProductProps {
   pageData: {
