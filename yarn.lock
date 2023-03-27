@@ -2968,6 +2968,37 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@paypal/paypal-js@npm:^5.1.4":
+  version: 5.1.5
+  resolution: "@paypal/paypal-js@npm:5.1.5"
+  dependencies:
+    promise-polyfill: ^8.2.3
+  checksum: 48a2ecac7aad98d49db2162e07abafd25ae88889fe70ca49c74070c3c0f2efbb79c63466856c3b7fc512902981bb0c27b7504e0ad642da0a2ff37b1b55c4aa38
+  languageName: node
+  linkType: hard
+
+"@paypal/react-paypal-js@npm:^7.8.2":
+  version: 7.8.2
+  resolution: "@paypal/react-paypal-js@npm:7.8.2"
+  dependencies:
+    "@paypal/paypal-js": ^5.1.4
+    "@paypal/sdk-constants": ^1.0.122
+  peerDependencies:
+    react: ">=16.3.0"
+    react-dom: ">=16.3.0"
+  checksum: 8cf91a4cbf94bbe9ac96367a25cd9d496180f92fd418d15130e8b11aee223f2f15b83369afa8dd4c3b829e13d5e61e3727ffca936974024906535c98858a7222
+  languageName: node
+  linkType: hard
+
+"@paypal/sdk-constants@npm:^1.0.122":
+  version: 1.0.129
+  resolution: "@paypal/sdk-constants@npm:1.0.129"
+  dependencies:
+    hi-base32: ^0.5.0
+  checksum: e401d55b13670abeab86ee48e608c4a8517126180ccfb34a2241cabe920e4e4758d0f09e9b61161f4972dd7e0a3631f3f1e766343c4634b1d98877ee62686f14
+  languageName: node
+  linkType: hard
+
 "@pmmmwh/react-refresh-webpack-plugin@npm:^0.5.3":
   version: 0.5.10
   resolution: "@pmmmwh/react-refresh-webpack-plugin@npm:0.5.10"
@@ -3885,6 +3916,15 @@ __metadata:
   version: 1.2.4
   resolution: "@types/range-parser@npm:1.2.4"
   checksum: b7c0dfd5080a989d6c8bb0b6750fc0933d9acabeb476da6fe71d8bdf1ab65e37c136169d84148034802f48378ab94e3c37bb4ef7656b2bec2cb9c0f8d4146a95
+  languageName: node
+  linkType: hard
+
+"@types/react-credit-cards@npm:^0.8.1":
+  version: 0.8.1
+  resolution: "@types/react-credit-cards@npm:0.8.1"
+  dependencies:
+    "@types/react": "*"
+  checksum: 10a09663860481f1e3315ec93c699a176d2bfd0644674a42a004a15bbd817e1e33f3cc9cf282e4948c6085e44a757f6b47d58fad87700867e299c9b206e8d869
   languageName: node
   linkType: hard
 
@@ -6035,6 +6075,13 @@ __metadata:
     safe-buffer: ^5.0.1
     sha.js: ^2.4.8
   checksum: ba12bb2257b585a0396108c72830e85f882ab659c3320c83584b1037f8ab72415095167ced80dc4ce8e446a8ecc4b2acf36d87befe0707d73b26cf9dc77440ed
+  languageName: node
+  linkType: hard
+
+"credit-card-type@npm:^8.3.0":
+  version: 8.3.0
+  resolution: "credit-card-type@npm:8.3.0"
+  checksum: 760e91bf390bb0fd8ab3426afb437dacdd190051050c30b74891a04c045944dc3da15d71c1eb7ace90edf6808782937fd9993bc4e598aabca9e698970ba29d7b
   languageName: node
   linkType: hard
 
@@ -8515,7 +8562,7 @@ eslint-config-standard-with-typescript@latest:
   languageName: node
   linkType: hard
 
-"globalthis@npm:^1.0.3":
+"globalthis@npm:^1.0.2, globalthis@npm:^1.0.3":
   version: 1.0.3
   resolution: "globalthis@npm:1.0.3"
   dependencies:
@@ -8737,6 +8784,13 @@ eslint-config-standard-with-typescript@latest:
   bin:
     he: bin/he
   checksum: 3d4d6babccccd79c5c5a3f929a68af33360d6445587d628087f39a965079d84f18ce9c3d3f917ee1e3978916fc833bb8b29377c3b403f919426f91bc6965e7a7
+  languageName: node
+  linkType: hard
+
+"hi-base32@npm:^0.5.0":
+  version: 0.5.1
+  resolution: "hi-base32@npm:0.5.1"
+  checksum: 6655682b5796d75ed3068071e61d05a490e2086c4908af3b94a730059147b8a4a5e8870e656b828d0550dcc9988d8748bda54a53e428cbce28e0d7a785b2ffde
   languageName: node
   linkType: hard
 
@@ -10784,6 +10838,13 @@ eslint-config-standard-with-typescript@latest:
   languageName: node
   linkType: hard
 
+"luhn@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "luhn@npm:2.4.1"
+  checksum: 7abe856cef12c3ef720953280486693c15594190950da75264f4376d84112566b090ac5aa7b92c2c169f325a40c30362a1331c8ce1714565109fb79b39b27c03
+  languageName: node
+  linkType: hard
+
 "lz-string@npm:^1.4.4":
   version: 1.4.4
   resolution: "lz-string@npm:1.4.4"
@@ -11173,6 +11234,13 @@ eslint-config-standard-with-typescript@latest:
   version: 4.14.0
   resolution: "mock-fs@npm:4.14.0"
   checksum: dccd976a8d753e19d3c7602ea422d1f7137def3c1128c177e1f5500fe8c50ec15fe0937cfc3a15c4577fe7adb9a37628b92da9294d13d90f08be4b669b0fca76
+  languageName: node
+  linkType: hard
+
+"moment@npm:^2.29.4":
+  version: 2.29.4
+  resolution: "moment@npm:2.29.4"
+  checksum: 0ec3f9c2bcba38dc2451b1daed5daded747f17610b92427bebe1d08d48d8b7bdd8d9197500b072d14e326dd0ccf3e326b9e3d07c5895d3d49e39b6803b76e80e
   languageName: node
   linkType: hard
 
@@ -11877,6 +11945,16 @@ eslint-config-standard-with-typescript@latest:
   version: 4.0.0
   resolution: "path-type@npm:4.0.0"
   checksum: 5b1e2daa247062061325b8fdbfd1fb56dde0a448fb1455453276ea18c60685bdad23a445dc148cf87bc216be1573357509b7d4060494a6fd768c7efad833ee45
+  languageName: node
+  linkType: hard
+
+"payment@npm:^2.3.0":
+  version: 2.4.6
+  resolution: "payment@npm:2.4.6"
+  dependencies:
+    globalthis: ^1.0.2
+    qj: ~2.0.0
+  checksum: 993806f55456207bb3b2c3134f88bbf8e02468cdc4521c3a4e2392b5643d68ad374878d6698e0fd0a05232195cfaf6666b6bb8c6fde6d00a148012cfc94238d1
   languageName: node
   linkType: hard
 
@@ -12941,6 +13019,13 @@ eslint-config-standard-with-typescript@latest:
   languageName: node
   linkType: hard
 
+"promise-polyfill@npm:^8.2.3":
+  version: 8.3.0
+  resolution: "promise-polyfill@npm:8.3.0"
+  checksum: 206373802076c77def0805758d0a8ece64120dfa6603f092404a1004211f8f2f67f33cadbc35953fc2a8ed0b0d38c774e88bdf01e20ce7a920723a60df84b7a5
+  languageName: node
+  linkType: hard
+
 "promise-retry@npm:^2.0.1":
   version: 2.0.1
   resolution: "promise-retry@npm:2.0.1"
@@ -12970,7 +13055,7 @@ eslint-config-standard-with-typescript@latest:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.8.1":
+"prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -13077,6 +13162,13 @@ eslint-config-standard-with-typescript@latest:
   version: 1.5.1
   resolution: "q@npm:1.5.1"
   checksum: 147baa93c805bc1200ed698bdf9c72e9e42c05f96d007e33a558b5fdfd63e5ea130e99313f28efc1783e90e6bdb4e48b67a36fcc026b7b09202437ae88a1fb12
+  languageName: node
+  linkType: hard
+
+"qj@npm:~2.0.0":
+  version: 2.0.0
+  resolution: "qj@npm:2.0.0"
+  checksum: d48e74b8f54d8c9560e749281e033ab3e7550682355be32289726352002c231d6d6b28752cf91729d758591c2a778534a61ca5cd2602fc3249f446146c58fe2d
   languageName: node
   linkType: hard
 
@@ -13190,6 +13282,20 @@ eslint-config-standard-with-typescript@latest:
   languageName: node
   linkType: hard
 
+"react-credit-cards-2@npm:^0.10.0":
+  version: 0.10.0
+  resolution: "react-credit-cards-2@npm:0.10.0"
+  dependencies:
+    credit-card-type: ^8.3.0
+    luhn: ^2.4.1
+    payment: ^2.3.0
+  peerDependencies:
+    prop-types: ^15.7.2
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: ae3bc00cccde5cd4e640f4f19177c07949e32acbbe13794a40dfc28e94c6215e3f02b5f513a4f22bcf0b44686931f8e39fa91a7ce2db335a812d3f36b5a053d0
+  languageName: node
+  linkType: hard
+
 "react-dev-utils@npm:^12.0.1":
   version: 12.0.1
   resolution: "react-dev-utils@npm:12.0.1"
@@ -13290,6 +13396,19 @@ eslint-config-standard-with-typescript@latest:
     react: ^15.x.x || ^16.x.x || ^17.x.x || ^18.x.x
     react-dom: ^15.x.x || ^16.x.x || ^17.x.x || ^18.x.x
   checksum: 2db8dd56e5926c4831e58b05650e310fd8eabc24607716ad7ffda3e0f6b325434edb098ad27068ea8db7f42fec37bc17eaffbaf562a322e6f1ace16dcc3d5422
+  languageName: node
+  linkType: hard
+
+"react-paypal-button-v2@npm:^2.6.3":
+  version: 2.6.3
+  resolution: "react-paypal-button-v2@npm:2.6.3"
+  dependencies:
+    prop-types: ^15.7.2
+    rimraf: ^3.0.0
+  peerDependencies:
+    react: ^0.14.6 || 15.x.x || 16.x.x || 17.x.x
+    react-dom: ^0.14.6 || 15.x.x || 16.x.x || 17.x.x
+  checksum: 3aaf834a872db09f97fd714e6c29bb5566cf2d46845ff4a46aaaeb84472289e742b7181570b481ce3ed490f753495bfb1eb2d9de91c445bd480d3c230b8021f2
   languageName: node
   linkType: hard
 
@@ -13416,6 +13535,7 @@ eslint-config-standard-with-typescript@latest:
     "@firebase/app": ^0.9.1
     "@headlessui/react": ^1.7.10
     "@heroicons/react": ^2.0.15
+    "@paypal/react-paypal-js": ^7.8.2
     "@supabase/supabase-js": ^2.10.0
     "@tanstack/react-query": ^4.24.4
     "@tanstack/react-query-devtools": ^4.24.4
@@ -13425,6 +13545,7 @@ eslint-config-standard-with-typescript@latest:
     "@types/jest": ^29.4.0
     "@types/node": ^18.11.18
     "@types/react": ^18.0.27
+    "@types/react-credit-cards": ^0.8.1
     "@types/react-dom": ^18.0.10
     "@types/react-lazy-load-image-component": ^1.5.2
     "@types/uuid": ^9.0.0
@@ -13442,14 +13563,17 @@ eslint-config-standard-with-typescript@latest:
     eslint-plugin-tailwindcss: ^3.8.2
     eslint-plugin-typescript: ^0.14.0
     firebase: ^9.16.0
+    moment: ^2.29.4
     prettier: ^2.8.3
     prettier-plugin-tailwindcss: ^0.2.2
     query-string: ^8.1.0
     react: ^18.2.0
+    react-credit-cards-2: ^0.10.0
     react-dom: ^18.2.0
     react-hook-form: 7.41.3
     react-icons: ^4.7.1
     react-lazy-load-image-component: ^1.5.6
+    react-paypal-button-v2: ^2.6.3
     react-router-dom: ^6.8.0
     react-scripts: 5.0.1
     react-toast: ^1.0.3
