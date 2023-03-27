@@ -10,9 +10,9 @@ import ErrorMessage from 'components/ui/ErrorMessage';
 import Button from 'components/ui/Button';
 import { SiEthereum } from 'react-icons/si';
 import { useState, MouseEvent, useCallback } from 'react';
-import { FILTERITEM } from 'data/Products/Menus';
+import { FILTERITEM } from 'data/Products';
 import { NftType } from 'utils/interfaces';
-import { removeCollectionsPrefix } from 'utils/collectionUtils';
+import { removeCollectionsPrefix } from 'utils/utils';
 
 type onCopyFn = (text: string) => Promise<boolean>;
 
