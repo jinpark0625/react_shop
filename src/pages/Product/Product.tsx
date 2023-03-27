@@ -12,33 +12,18 @@ import { useAuthContext } from '../../context/AuthContext';
 import NotFound from '../NotFound';
 import type { Swiper as SwiperClass } from 'swiper';
 import CartSlideOver from 'components/Product/CartSlideOver';
-import { classNames, removeCollectionsPrefix } from 'utils/collectionUtils';
+import { classNames, removeCollectionsPrefix } from 'utils/utils';
 import Modal from 'components/ui/Modal';
 import Button from '../../components/ui/Button';
 import { ProductType } from 'utils/interfaces';
-import LoadingSkeleton from 'components/ui/LoadingSkeleton';
+import Loading from 'components/ui/Loading';
+import ProductLoading from 'components/Product/ProductLoading';
 interface CartProps {
   id?: number;
   image?: string;
   title?: string;
   price?: number;
 }
-
-const LoadingProduct = () => {
-  return (
-    <div className="mx-auto max-w-7xl px-4 pt-24 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 lg:grid-cols-2">
-        <div className="relative animate-pulse overflow-hidden rounded-2xl bg-slate-50  pt-[100%]">
-          <LoadingSkeleton className="absolute top-0 left-0 h-full w-auto -translate-x-1/2 -translate-y-1/2 " />
-        </div>
-        <div className="mx-auto w-full pl-0 pt-10 pb-16 lg:pl-8 lg:pt-0 lg:pb-24">
-          <LoadingSkeleton className=" animate-pulse rounded-md bg-slate-50  pt-[30%]" />
-          <LoadingSkeleton className="mt-10 animate-pulse rounded-md bg-slate-50  pt-[30%]" />
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const Product = () => {
   const { pathname } = useLocation();
@@ -117,10 +102,12 @@ const Product = () => {
 
   if (itemError) return <NotFound />;
 
-  if (itemLoading) return <LoadingProduct />;
+  if (!itemLoading) return <ProductLoading />;
 
   return (
     <>
+      {/* Loading */}
+      {addOrUpdateItem.isLoading && <Loading />}
       {/* Login Modal  */}
       {open && (
         <Modal
@@ -145,6 +132,7 @@ const Product = () => {
           cartError={cartError}
           cartItems={cartItems}
           deleteCartItem={deleteCartItem}
+          navigate={navigate}
         />
       )}
 
@@ -153,6 +141,7 @@ const Product = () => {
         <div className="mx-auto mb-32 max-w-7xl px-4 pt-24 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 ">
             {/* image */}
+
             <div>
               <Swiper
                 spaceBetween={10}
@@ -185,7 +174,7 @@ const Product = () => {
                 modules={[FreeMode, Thumbs]}
                 className="mySwiper mt-4"
               >
-                {productData?.image.map((img: string, i: number) => (
+                {productData?.image?.map((img: string, i: number) => (
                   <SwiperSlide key={i}>
                     <div className="relative overflow-hidden rounded-2xl bg-gray-100 pt-[100%]">
                       <div className="absolute inset-0 translate-x-1/2 translate-y-1/2">
