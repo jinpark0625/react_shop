@@ -13,12 +13,13 @@ import { NFT_LOADING_ARRAY } from 'data/Home/slideOptions';
 import ImagePlaceholder from '../../components/ui/ImagePlaceholder';
 import ProductCard from '../../components/ui/ProductCard';
 import CategorySort from 'components/Product/CategorySort';
-import { FILTERS, COLLECTION } from '../../data/Products/Menus';
+import { FILTERS, COLLECTION } from '../../data/Products';
 import FilterMobile from 'components/Product/FilterMobile';
 import FilterDesktop from 'components/Product/FilterDesktop';
 import ProductTitle from 'components/ui/ProductTitle';
-import { deduplicateByOptions } from 'utils/collectionUtils';
+import { deduplicateByOptions } from 'utils/utils';
 import useSortParams from 'hooks/useSortParams';
+import ErrorMessage from 'components/ui/ErrorMessage';
 
 interface ProductProps {
   shouldDeduplicate: boolean;
@@ -151,11 +152,7 @@ const ShopAll = ({ shouldDeduplicate, setShouldDeduplicate }: ProductProps) => {
 
               <ul className="grid grid-cols-1  gap-6 md:grid-cols-2">
                 <>
-                  {error && (
-                    <p className="col-span-2 text-center text-red-500">
-                      Sorry something went wrong. Please try again
-                    </p>
-                  )}
+                  {error && <ErrorMessage />}
                   {products?.map((product) => {
                     return (
                       <li
