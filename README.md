@@ -56,6 +56,12 @@ If you enter yarn start, your browser open http://localhost:3000/.
 - Leveraged the Supabase platform for PostgreSQL support, enabling more advanced queries for NFT data storage compared to Firebase.
 - Integrated with the OpenSea API to obtain NFT data.
 
+### v0.4.0
+
+- Update Edit Profile page: Users can change name, profile image, and password using Firebase Realtime Database and Auth.
+- The PayPal API is used to securely process payments and confirm successful transactions. To test this feature, a PayPal developer account was used in conjunction with the PayPal sandbox to simulate transactions without incurring any real charges.
+- Order History page: Users can view their past orders. The transaction details and products are stored in Firebase Realtime Database and displayed in a table format for easy viewing.
+
 <br/>
 
 ## Technical Skills
@@ -158,13 +164,44 @@ If you enter yarn start, your browser open http://localhost:3000/.
   </tbody>
 </table>
 
+### v0.4.0
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="50%">Edit Profile Page</th>
+      <th width="50%">Checkout Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td width="50%"><img src="https://user-images.githubusercontent.com/69961780/228140297-f98f3b59-2b59-40a0-a0bd-32f310be42e5.png"/></td>
+      <td width="50%"><img src="https://user-images.githubusercontent.com/69961780/228140849-8dfc0519-7eed-4f92-a146-2fe5c459f56b.gif"/></td>
+    </tr>
+  </tbody>
+    <thead>
+    <tr>
+      <th width="50%">Order Confirmation Page</th>
+      <th width="50%">Orders Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td width="50%"><img src="https://user-images.githubusercontent.com/69961780/228140981-5099e31d-251c-4fc4-9b94-385b67296c4e.png"/></td>
+      <td width="50%"><img src="https://user-images.githubusercontent.com/69961780/228141066-02eb4081-62dd-4c1a-99dd-6c2a372cd716.png"/></td>
+    </tr>
+  </tbody>
+</table>
+
 ## Future Development
 
 This project is in its early stages of development, with future plans to implement additional features such as:
 
 - ~~Membership and login through firebase storage~~
+- ~~Edit User Profile~~
 - ~~Enhance the website's UI, making it even more visually appealing and user-friendly.~~
 - ~~Retrieve products and NFT data from APIs and filter by options.~~
 - ~~Use the OpenSea API to retrieve NFT data and integrate Supabase for more complex queries on NFT data.~~
+- ~~Add Express Checkout by Paypal~~
+- Code Refactoring and Optimization
 - Get NFT Metadata and Update user's contract address
-- Add Express Checkout by Paypal
