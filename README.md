@@ -5,25 +5,15 @@ Happy Jolly built with React.js, Typescript, Firebase, Cloudinary, react-query, 
 
 ## table of contents
 
-1. [Installation](#installation)
+1. [Deployed Application](#deployed-application)
 2. [Key Features](#key-features)
 3. [Preview](#preview)
 4. [Technical Skills](#technical-skills)
 5. [Future Development](#future-development)
 
-## Installation
+## Deployed Application
 
-```
-yarn
-```
-
-## Usage
-
-```
-yarn run start
-```
-
-If you enter yarn start, your browser open http://localhost:3000/.
+<a href="https://happy-jolly.vercel.app/" target="_blank">Happy Jolly</a>
 
 <br/>
 
