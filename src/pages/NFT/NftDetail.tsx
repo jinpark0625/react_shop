@@ -24,7 +24,7 @@ const NftDetail = () => {
   const { isLoading, error, data } = useNftDetail(id);
 
   const { title, image, token_id } = data?.data?.[0] ?? {};
-  const { permalink, usd_price, eth_price } = data ?? {};
+  // const { permalink, usd_price, eth_price } = data ?? {};
 
   const [clicked, setClicked] = useState(false);
 
@@ -100,13 +100,15 @@ const NftDetail = () => {
                       </span>
                       <p className=" flex items-center text-lg font-bold text-violet-500">
                         <SiEthereum className="mr-1" />
-                        {eth_price ? eth_price * 0.01 : 0} ETH
+                        {/* {eth_price ? eth_price * 0.01 : 0} ETH */}
+                        0.01
                       </p>
                     </div>
                     <div className="text-gray-500">
                       <div className="text-right text-xs">USD</div>
                       <p className="mt-1 flex items-center justify-end text-sm">
-                        ${(usd_price ? usd_price * 0.01 : 0).toFixed(2)}
+                        {/* ${(usd_price ? usd_price * 0.01 : 0).toFixed(2)} */}
+                        {(data.usd * 0.01).toFixed(2)}
                       </p>
                     </div>
                   </div>
@@ -115,7 +117,13 @@ const NftDetail = () => {
                   text="View on OpenSea"
                   onClick={(e) => {
                     e.preventDefault();
-                    window.open(permalink, '_blank');
+                    // window.open(permalink, '_blank');
+                    window.open(
+                      `https://opensea.io/assets/ethereum/0x495f947276749ce646f68ac8c248420045cb7b5e/${
+                        token_id ?? ''
+                      }`,
+                      '_blank',
+                    );
                   }}
                   className="mb-5 mt-8 h-full w-full border bg-violet-500 font-medium text-white shadow-sm transition-all hover:bg-violet-600"
                 />
