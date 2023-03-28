@@ -191,7 +191,7 @@ const ContactForm = ({ register, errors }: ContactPropsTypes) => {
                   id="credit"
                   name="paymentMethod"
                   type="radio"
-                  className="mr-2 flex w-4 items-center border-gray-300 accent-violet-500"
+                  className="mr-2 flex items-center border-gray-300 accent-violet-500"
                   inputClassName="h-4"
                 />
                 <label
@@ -208,7 +208,7 @@ const ContactForm = ({ register, errors }: ContactPropsTypes) => {
                   value="paypal"
                   name="paymentMethod"
                   type="radio"
-                  className="mr-2 flex w-4 items-center border-gray-300 accent-violet-500"
+                  className="mr-2 flex items-center border-gray-300 accent-violet-500"
                   inputClassName="h-4"
                 />
                 <label
