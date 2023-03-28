@@ -20,7 +20,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    tsconfigRootDir: __dirname,
+    project: './tsconfig.json',
   },
   rules: {
     'react/react-in-jsx-scope': 'off',
