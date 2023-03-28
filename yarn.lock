@@ -6078,13 +6078,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"credit-card-type@npm:^8.3.0":
-  version: 8.3.0
-  resolution: "credit-card-type@npm:8.3.0"
-  checksum: 760e91bf390bb0fd8ab3426afb437dacdd190051050c30b74891a04c045944dc3da15d71c1eb7ace90edf6808782937fd9993bc4e598aabca9e698970ba29d7b
-  languageName: node
-  linkType: hard
-
 "cross-fetch@npm:^3.1.4, cross-fetch@npm:^3.1.5":
   version: 3.1.5
   resolution: "cross-fetch@npm:3.1.5"
@@ -10838,13 +10831,6 @@ eslint-config-standard-with-typescript@latest:
   languageName: node
   linkType: hard
 
-"luhn@npm:^2.4.1":
-  version: 2.4.1
-  resolution: "luhn@npm:2.4.1"
-  checksum: 7abe856cef12c3ef720953280486693c15594190950da75264f4376d84112566b090ac5aa7b92c2c169f325a40c30362a1331c8ce1714565109fb79b39b27c03
-  languageName: node
-  linkType: hard
-
 "lz-string@npm:^1.4.4":
   version: 1.4.4
   resolution: "lz-string@npm:1.4.4"
@@ -13282,17 +13268,15 @@ eslint-config-standard-with-typescript@latest:
   languageName: node
   linkType: hard
 
-"react-credit-cards-2@npm:^0.10.0":
-  version: 0.10.0
-  resolution: "react-credit-cards-2@npm:0.10.0"
+"react-credit-cards@npm:^0.8.3":
+  version: 0.8.3
+  resolution: "react-credit-cards@npm:0.8.3"
   dependencies:
-    credit-card-type: ^8.3.0
-    luhn: ^2.4.1
     payment: ^2.3.0
   peerDependencies:
     prop-types: ^15.7.2
-    react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: ae3bc00cccde5cd4e640f4f19177c07949e32acbbe13794a40dfc28e94c6215e3f02b5f513a4f22bcf0b44686931f8e39fa91a7ce2db335a812d3f36b5a053d0
+    react: ^15.0.0 || ^16.0.0
+  checksum: d2cbd5cbecf451a85841968aa5bc5a0aa1c62e26c0841852e46394559196c838f256d8cb3c3c2c21ffd6da0a83ec9ac35a003c66128e242f94533760fbb625fc
   languageName: node
   linkType: hard
 
@@ -13568,7 +13552,7 @@ eslint-config-standard-with-typescript@latest:
     prettier-plugin-tailwindcss: ^0.2.2
     query-string: ^8.1.0
     react: ^18.2.0
-    react-credit-cards-2: ^0.10.0
+    react-credit-cards: ^0.8.3
     react-dom: ^18.2.0
     react-hook-form: 7.41.3
     react-icons: ^4.7.1
