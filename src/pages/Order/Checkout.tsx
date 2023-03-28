@@ -2,7 +2,7 @@ import { useAuthContext } from 'context/AuthContext';
 import { useWatch } from 'react-hook-form';
 import { useState } from 'react';
 import ProductTitle from 'components/ui/ProductTitle';
-import 'react-credit-cards-2/es/styles-compiled.css';
+import 'react-credit-cards/es/styles-compiled.css';
 import useGetCardForm from 'hooks/useGetCardForm';
 import useCart from 'hooks/useCart';
 import { CardTypes, Focused } from 'utils/interfaces';
