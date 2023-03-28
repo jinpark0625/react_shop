@@ -1,7 +1,7 @@
 # Happy Jolly
 
 <img width="1304" alt="스크린샷 2023-02-20 오전 2 56 41" src="https://user-images.githubusercontent.com/69961780/220046017-7c1536c2-f7f3-4903-845b-acd6ec579a1e.png">
-Happy Jolly built with React.js, Typescript, Firebase, Cloudinary, react-query, and tailwind-css, this e-commerce website allows users to log in and shop for NFTs and products. Currently, the top administrator has the ability to register new products, and all users can view and manage the products in their cart through Firebase real-time database.
+Happy Jolly is a feature-rich e-commerce website that has been built using modern web technologies such as React.js, Typescript, Firebase, Supabase, Cloudinary, PayPal, React-query, and tailwind-css. The website is designed to provide an engaging user experience for online shoppers interested in purchasing NFTs and other products. Happy Jolly offers a secure login system that enables users to create accounts and access personalized content. The site also features a robust shopping cart that allows users to add products to their cart and complete purchases with ease. Moreover, Happy Jolly offers a collection of exclusive NFTs that users can browse, buy and add to their collection. With its clean design and intuitive user interface, Happy Jolly provides a seamless online shopping experience that is both enjoyable and convenient.
 
 ## table of contents
 
