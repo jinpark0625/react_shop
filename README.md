@@ -187,8 +187,8 @@ If you enter yarn start, your browser open http://localhost:3000/.
   </thead>
   <tbody>
     <tr>
-      <td width="50%"><img src="https://user-images.githubusercontent.com/69961780/228140981-5099e31d-251c-4fc4-9b94-385b67296c4e.png"/></td>
       <td width="50%"><img src="https://user-images.githubusercontent.com/69961780/228141066-02eb4081-62dd-4c1a-99dd-6c2a372cd716.png"/></td>
+      <td width="50%"><img src="https://user-images.githubusercontent.com/69961780/228140981-5099e31d-251c-4fc4-9b94-385b67296c4e.png"/></td>
     </tr>
   </tbody>
 </table>
