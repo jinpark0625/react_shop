@@ -87,8 +87,8 @@ const NftDetail = () => {
                   />
                   <div
                     className={`absolute bottom-3 left-2 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-gray-800 ${
-                      clicked ? 'hidden' : 'block'
-                    }`}
+                      clicked ? 'opacity-0' : 'opacity-100'
+                    } transition duration-300`}
                   >
                     <ArrowPathIcon className="h-5 w-5 text-white" />
                   </div>
